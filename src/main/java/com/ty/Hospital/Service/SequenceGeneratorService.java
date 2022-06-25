@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.ty.Hospital.Dto.DataBase_Sequens;
 
+import com.ty.Hospital.Dto.Hospital_Sequences;
+
+
 @Service
 public class SequenceGeneratorService {
     private  MongoOperations mongoOperations;
@@ -22,6 +25,15 @@ public class SequenceGeneratorService {
         this.mongoOperations = mongoOperations;
     }
 
+    public  int generateHospitalSequence(String seqName) {
+
+        Hospital_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+                new Update().inc("seq",1), options().returnNew(true).upsert(true),
+                Hospital_Sequences.class);
+        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+    }
+    
     public  int generateSequence(String seqName) {
 
         DataBase_Sequens counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
