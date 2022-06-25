@@ -19,7 +19,7 @@ public class HospitalController {
 	
 	@PostMapping("hospital")
 	public Hospital saveHospital(@RequestBody Hospital hospital) {
-		hospital.setId(service.generateSequence(Hospital.SEQUENCE_NAME));
+		hospital.setId(service.generateHospitalSequence(Hospital.SEQUENCE_NAME));
 		return repo.save(hospital);
 	}
 }

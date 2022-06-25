@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Hospital {
 	@Transient
-	public static final String SEQUENCE_NAME = "user_sequence";
+	public static final String SEQUENCE_NAME = "hospital_sequence";
 	@Id
 	private int id;
 	private String name;
