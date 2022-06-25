@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Controller.Repo.HospitalRepo;
 import com.ty.Hospital.Dto.Hospital;
-import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 
 @RestController
@@ -20,7 +19,7 @@ public class HospitalController {
 	
 	@PostMapping("hospital")
 	public Hospital saveHospital(@RequestBody Hospital hospital) {
-		hospital.setId(service.generateSequence(User.SEQUENCE_NAME));
+		hospital.setId(service.generateSequence(Hospital.SEQUENCE_NAME));
 		return repo.save(hospital);
 	}
 }
