@@ -49,7 +49,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@PutMapping("admin/{aid}/branch/{bid}/building")
+	@PutMapping("admin/{aid}/branch/{bid}/facility")
 	@ApiOperation("To Update Facilities By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update The Facilitys Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Fecility Id/Facility Id did not Found"),
