@@ -1,4 +1,4 @@
-package com.ty.Hospital.Controller.Repo;
+package com.ty.Hospital.Repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
