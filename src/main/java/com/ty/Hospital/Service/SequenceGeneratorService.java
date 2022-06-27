@@ -11,10 +11,12 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.ty.Hospital.Dto.Bed_Sequences;
 import com.ty.Hospital.Dto.Branch_Sequences;
 import com.ty.Hospital.Dto.Building_Sequences;
 import com.ty.Hospital.Dto.DataBase_Sequens;
 import com.ty.Hospital.Dto.Encounter_Sequences;
+import com.ty.Hospital.Dto.Facility_Sequences;
 import com.ty.Hospital.Dto.Floor_Sequences;
 import com.ty.Hospital.Dto.Hospital_Sequences;
 import com.ty.Hospital.Dto.Room_Sequences;
@@ -61,7 +63,7 @@ public class SequenceGeneratorService {
 		return !Objects.isNull(counter) ? counter.getSeq() : 1;
 
 	}
-	
+
 	public int generateRoomSequence(String seqName) {
 
 		Room_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
@@ -69,7 +71,6 @@ public class SequenceGeneratorService {
 		return !Objects.isNull(counter) ? counter.getSeq() : 1;
 
 	}
-	
 
 	public int generateEncounterSequence(String seqName) {
 
@@ -79,6 +80,20 @@ public class SequenceGeneratorService {
 
 	}
 
+	public int generateFacilitySequence(String seqName) {
+
+		Facility_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Facility_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
+	public int generateBedSequence(String seqName) {
+
+		Bed_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Bed_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
 
 	public int generateSequence(String seqName) {
 
