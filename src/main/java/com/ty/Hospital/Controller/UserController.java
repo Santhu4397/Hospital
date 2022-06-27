@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ty.Hospital.Controller.Repo.UserRepo;
 import com.ty.Hospital.Dto.User;
+import com.ty.Hospital.Repo.UserRepo;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 
 @RestController

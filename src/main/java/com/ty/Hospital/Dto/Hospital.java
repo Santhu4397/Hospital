@@ -1,4 +1,4 @@
-package com.ty.Hospital.Dto;
+  package com.ty.Hospital.Dto;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
