@@ -4,14 +4,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "Floors")
-public class Floor {
+@Document(collation = "Rooms")
+public class Room {
 	@Transient
-	public static final String SEQUENCE_NAME = "floor_Sequences";
+	public static final String SEQUENCE_NAME = "room_Sequences";
 	@Id
 	private int id;
-	private int floorNumber;
+	private int roomNumber;
 	private String type;
+	private Floor floor;
 
 	public int getId() {
 		return id;
@@ -21,12 +22,12 @@ public class Floor {
 		this.id = id;
 	}
 
-	public int getFloorNumber() {
-		return floorNumber;
+	public int getRoomNumber() {
+		return roomNumber;
 	}
 
-	public void setFloorNumber(int floorNumber) {
-		this.floorNumber = floorNumber;
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 
 	public String getType() {
