@@ -38,8 +38,8 @@ public class UserController {
 	public ResponseEntity<ResponseStructure<List<User>>> getAll(){
 		return null;
 	}
-	@PutMapping("user/update/{id}")
-	public ResponseEntity<ResponseStructure<User>> update(@PathVariable int id){
+	@PutMapping("user/admin/{aid}")
+	public ResponseEntity<ResponseStructure<User>> update(@RequestBody User user, @PathVariable int aid){
 		return null;
 	}
 	@DeleteMapping("user")
