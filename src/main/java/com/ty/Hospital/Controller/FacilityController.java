@@ -31,7 +31,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@GetMapping("facility/{id}")
+	@GetMapping("facillity/{id}")
 	@ApiOperation("To fetch facility By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Fecility Id didnot Found"),
@@ -40,7 +40,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@GetMapping("facilities")
+	@GetMapping("facillity")
 	@ApiOperation("To fetch All Facilities")
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Fecilitys Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request"),
@@ -49,7 +49,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@PutMapping("admin/{aid}/branch/{bid}/facility")
+	@PutMapping("admin/{aid}/branch/{bid}/facillity")
 	@ApiOperation("To Update Facilities By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update The Facilitys Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Fecility Id/Facility Id did not Found"),
@@ -59,7 +59,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@DeleteMapping("facility/{id}")
+	@DeleteMapping("facillity/{id}")
 	@ApiOperation("To Delete facility By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Delete The Facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Facility Id didnot Found"),
