@@ -15,26 +15,56 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class BuildingController {
-	@PostMapping("building/branch/{bid}/user/{uid}")
-	public ResponseEntity<ResponseStructure<Building>> save(@RequestBody Building building,@PathVariable int uid,@PathVariable int bid) {
+	@PostMapping("admin/{aid}/branch/{bid}/building")
+	@ApiOperation("To Save Building By Admin")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save The Building Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/AdiminId/Branch didnot Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Building>> save(@RequestBody Building building, @PathVariable int aid,
+			@PathVariable int bid) {
 		return null;
 	}
+
 	@GetMapping("building/{bid}")
-	public ResponseEntity<ResponseStructure<Building>> getById(@PathVariable int bid){
+	@ApiOperation("To fetch Building By Id")
+	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Building Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Id didnot Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Building>> getById(@PathVariable int bid) {
 		return null;
 	}
+
 	@GetMapping("building")
-	public ResponseEntity<ResponseStructure<List<Building>>> getAll(){
+	@ApiOperation("To fetch All Building ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Building Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<List<Building>>> getAll() {
 		return null;
 	}
-	@PutMapping("building/{bid}/admin/{aid}")
-	public ResponseEntity<ResponseStructure<Building>> update(@RequestBody Building building,@PathVariable int bid,@PathVariable int aid){
+
+	@PutMapping("admin/{aid}/branch/{bid}/building")
+	@ApiOperation("To Update Building By Id")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update The Building Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Id/Admin Id didnot Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Building>> update(@RequestBody Building building, @PathVariable int bid,
+			@PathVariable int aid) {
 		return null;
 	}
-	@DeleteMapping("building")
-	public ResponseEntity<ResponseStructure<Building>> delete(@RequestParam int id){
+
+	@DeleteMapping("building/{id}")
+	@ApiOperation("To Delete Building By Id")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Delete The Building Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Id didnot Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Building>> delete(@RequestParam int id) {
 		return null;
 	}
 
