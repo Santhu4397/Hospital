@@ -16,6 +16,7 @@ public class Branch {
 	private String city;
 	private long branch_Number;
 	private int pincode;
+	private Hospital hospital;
 	public int getId() {
 		return id;
 	}
