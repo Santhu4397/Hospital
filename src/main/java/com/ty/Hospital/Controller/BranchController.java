@@ -8,7 +8,7 @@ import com.ty.Hospital.Dto.Branch;
 @RestController
 public class BranchController {
 	
-	@PostMapping()
+	@PostMapping("branch")
 	public Branch saveBranch() {
 		return null;
 	}

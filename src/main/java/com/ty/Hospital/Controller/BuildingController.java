@@ -7,7 +7,7 @@ import com.ty.Hospital.Dto.Building;
 
 @RestController
 public class BuildingController {
-	@PostMapping()
+	@PostMapping("building")
 	public Building save() {
 		return null;
 	}
