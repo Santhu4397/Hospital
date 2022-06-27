@@ -4,9 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-@Document(collection = "floor_Sequences")
+@Document(collection = "facility_Sequences")
 @Component
-public class Floor_Sequences {
+public class Facility_Sequences {
 	@Id
 	private String id;
 	private int seq;
