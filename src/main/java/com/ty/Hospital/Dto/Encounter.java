@@ -15,33 +15,42 @@ public class Encounter {
 	private String reason;
 	private LocalDateTime dateOfAdmit;
 	private String createrName;
+	private User user;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getReason() {
 		return reason;
 	}
+
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
 	public LocalDateTime getDateOfAdmit() {
 		return dateOfAdmit;
 	}
+
 	public void setDateOfAdmit(LocalDateTime dateOfAdmit) {
 		this.dateOfAdmit = dateOfAdmit;
 	}
+
 	public String getCreaterName() {
 		return createrName;
 	}
+
 	public void setCreaterName(String createrName) {
 		this.createrName = createrName;
 	}
+
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
-	
 
 }
