@@ -18,6 +18,10 @@ import com.ty.Hospital.Repo.UserRepo;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class UserController {
 	@Autowired
@@ -26,24 +30,48 @@ public class UserController {
 	SequenceGeneratorService service;
 
 	@PostMapping("user")
+	@ApiOperation("To Save The User Data ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save User Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for UserData"),
+			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
 		user.setId(service.generateSequence(User.SEQUENCE_NAME));
 		return null;
 	}
+
 	@GetMapping("user/uid/{id}")
-	public ResponseEntity<ResponseStructure<User>> getByID(@RequestParam int id){
+	@ApiOperation("To Fetch The User Data By Id ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Fetching User Data Successfully"),
+			@ApiResponse(code = 400, message = "Id did not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<User>> getByID(@RequestParam int id) {
 		return null;
 	}
+
 	@GetMapping("user")
-	public ResponseEntity<ResponseStructure<List<User>>> getAll(){
+	@ApiOperation("To fetch The All User Data ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "fetching all User Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for UserData"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<List<User>>> getAll() {
 		return null;
 	}
+
 	@PutMapping("user/admin/{aid}")
-	public ResponseEntity<ResponseStructure<User>> update(@RequestBody User user, @PathVariable int aid){
+	@ApiOperation("To Update The User Data ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save/update User Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for UserData/userId not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<User>> update(@RequestBody User user, @PathVariable int aid) {
 		return null;
 	}
+
 	@DeleteMapping("user")
-	public ResponseEntity<ResponseStructure<Boolean>> deleteById(@RequestParam int id){
+	@ApiOperation("To Delete The User Data By Id ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Delete User Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for UserData/userId not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Boolean>> deleteById(@RequestParam int id) {
 		return null;
 	}
 

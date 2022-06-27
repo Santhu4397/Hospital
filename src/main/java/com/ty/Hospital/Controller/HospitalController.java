@@ -18,34 +18,64 @@ import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class HospitalController {
 	@Autowired
 	private HospitalRepo repo;
-	
+
 	@Autowired
 	SequenceGeneratorService service;
-	
-	@PostMapping("hospital/admin/{aid}")
-	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital,@PathVariable int aid) {
+
+	@PostMapping("/admin/{aid}/hospital")
+	@ApiOperation("To Save Hospital By AdminId")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save Hospital Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for Data/AdminId Does not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital,
+			@PathVariable int aid) {
 		hospital.setId(service.generateHospitalSequence(Hospital.SEQUENCE_NAME));
 		return null;
 	}
+
 	@GetMapping("hospital/hid/{id}")
-	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam int id){
+	@ApiOperation("To Fetch Hospital By Id ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Hospital Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for Data/HospitalId Does not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam int id) {
 		return null;
 	}
+
 	@GetMapping("hospital")
-	public ResponseEntity<ResponseStructure<List<Hospital>>> getall(){
+	@ApiOperation("To Fetch Hospital")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Hospital Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for Data"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<List<Hospital>>> getall() {
 		return null;
 	}
+
 	@PutMapping("hospital/{hid}/admin/{aid}")
-	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Hospital hospital, @PathVariable int hid ,@PathVariable int aid){
+	@ApiOperation("To Update Hospital By hospitalid and AdminId")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Update Hospital Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for Data/AdminId (or)hospital Id Does not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Hospital hospital, @PathVariable int hid,
+			@PathVariable int aid) {
 		return null;
 	}
-	@DeleteMapping("hospital")
-	public ResponseEntity<ResponseStructure<Boolean>> delete(@RequestParam int id){
+
+	@DeleteMapping("hospital/hid/{id}")
+	@ApiOperation("To Delete Hospital By hospitalId")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Update Hospital Data Successfully"),
+			@ApiResponse(code = 400, message = "bad request for Data/hospital Id Does not found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Boolean>> delete(@RequestParam int id) {
 		return null;
 	}
-	
+
 }
