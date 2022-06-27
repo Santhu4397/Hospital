@@ -1,5 +1,7 @@
 package com.ty.Hospital.Dto;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +13,10 @@ public class Building {
 	@Id
 	private int id;
 	private String building_Name;
+	private User user;
+	private Branch branch;
+	private List<Floor> floors;
+	private List<Facility> facilities;
 	public int getId() {
 		return id;
 	}

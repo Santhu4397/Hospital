@@ -12,6 +12,8 @@ public class Facility {
 	private int id;
 	private String diagnosticType;
 	private double cost;
+	private User user;
+	private Building building;
 
 	public int getId() {
 		return id;

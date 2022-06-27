@@ -1,5 +1,7 @@
 package com.ty.Hospital.Dto;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,7 +18,9 @@ public class Branch {
 	private String city;
 	private long branch_Number;
 	private int pincode;
+	private User user;
 	private Hospital hospital;
+	private List<Building> buildings;
 	public int getId() {
 		return id;
 	}
