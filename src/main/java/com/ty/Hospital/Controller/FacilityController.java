@@ -59,7 +59,7 @@ public class FacilityController {
 		return null;
 	}
 
-	@DeleteMapping("fecility/{id}")
+	@DeleteMapping("facility/{id}")
 	@ApiOperation("To Delete facility By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Delete The Facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Facility Id didnot Found"),
