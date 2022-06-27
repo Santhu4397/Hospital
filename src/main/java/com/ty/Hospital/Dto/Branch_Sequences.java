@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-@Document(collection = "hospital_Sequences")
+@Document(collection = "branch_Sequences")
 @Component
 public class Branch_Sequences {
 
