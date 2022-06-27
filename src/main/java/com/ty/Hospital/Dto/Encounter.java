@@ -16,6 +16,7 @@ public class Encounter {
 	private LocalDateTime dateOfAdmit;
 	private String createrName;
 	private User user;
+	private Bed bed;
 
 	public int getId() {
 		return id;

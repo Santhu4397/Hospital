@@ -14,7 +14,9 @@ public class Floor {
 	private int id;
 	private int floorNumber;
 	private String type;
+	private User user;
 	private List<Room> rooms;
+	private Building building;
 
 	public int getId() {
 		return id;

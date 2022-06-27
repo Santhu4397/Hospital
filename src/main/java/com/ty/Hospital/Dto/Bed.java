@@ -1,5 +1,7 @@
 package com.ty.Hospital.Dto;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +14,9 @@ public class Bed {
 	private int id;
 	private int bedNumber;
 	private String type;
+	private User user;
+	private Room room;
+	private List<Encounter> encounters;
 	public int getId() {
 		return id;
 	}
