@@ -12,37 +12,60 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.ty.Hospital.Dto.DataBase_Sequens;
-
+import com.ty.Hospital.Dto.Encounter_Sequences;
+import com.ty.Hospital.Dto.Floor_Sequences;
 import com.ty.Hospital.Dto.Hospital_Sequences;
-
+import com.ty.Hospital.Dto.Room_Sequences;
 
 @Service
 public class SequenceGeneratorService {
-    private  MongoOperations mongoOperations;
+	private MongoOperations mongoOperations;
 
-   @Autowired
-    public SequenceGeneratorService(MongoOperations mongoOperations) {
-        this.mongoOperations = mongoOperations;
-    }
+	@Autowired
+	public SequenceGeneratorService(MongoOperations mongoOperations) {
+		this.mongoOperations = mongoOperations;
+	}
 
-    public  int generateHospitalSequence(String seqName) {
+	public int generateHospitalSequence(String seqName) {
 
-        Hospital_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
-                new Update().inc("seq",1), options().returnNew(true).upsert(true),
-                Hospital_Sequences.class);
-        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+		Hospital_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Hospital_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
 
-    }
-    
-    public  int generateSequence(String seqName) {
+	}
 
-        DataBase_Sequens counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
-                new Update().inc("seq",1), options().returnNew(true).upsert(true),
-                DataBase_Sequens.class);
-        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+	public int generateFloorSequence(String seqName) {
 
-    }
+		Floor_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Floor_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
+	
+	public int generateRoomSequence(String seqName) {
+
+		Room_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Room_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
+	
+
+	public int generateEncounterSequence(String seqName) {
+
+		Encounter_Sequences counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), Encounter_Sequences.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
 
 
+	public int generateSequence(String seqName) {
+
+		DataBase_Sequens counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
+				new Update().inc("seq", 1), options().returnNew(true).upsert(true), DataBase_Sequens.class);
+		return !Objects.isNull(counter) ? counter.getSeq() : 1;
+
+	}
 
 }
