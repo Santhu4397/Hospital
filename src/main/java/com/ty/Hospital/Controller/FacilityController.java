@@ -2,6 +2,7 @@ package com.ty.Hospital.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Facility;
+import com.ty.Hospital.Repo.FacilityRepo;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +24,11 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class FacilityController {
+
+	
+	@Autowired
+	FacilityRepo repo;
+	
 	@PostMapping("admin/{aid}/branch/{bid}/facility")
 	@ApiOperation("To Save facility By Admin")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The facility Successfully"),
