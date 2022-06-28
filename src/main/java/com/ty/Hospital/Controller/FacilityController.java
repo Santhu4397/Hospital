@@ -16,31 +16,32 @@ import com.ty.Hospital.Dto.Facility;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class FacilityController {
-	@PostMapping("admin/{aid}/branch/{bid}/facillity")
+	@PostMapping("admin/{aid}/branch/{bid}/facility")
 	@ApiOperation("To Save facility By Admin")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/AdiminId"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Facility>> save(@RequestBody Facility facility, @PathVariable int aid,
-			@PathVariable int bid) {
+	public ResponseEntity<ResponseStructure<Facility>> save(@RequestBody Facility facility,
+			@PathVariable @ApiParam("AdminID") int aid, @PathVariable @ApiParam("BranchID") int bid) {
 		return null;
 	}
 
-	@GetMapping("facillity/{id}")
+	@GetMapping("facility/{id}")
 	@ApiOperation("To fetch facility By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Fecility Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Facility>> getById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Facility>> getById(@PathVariable @ApiParam("FacilityID") int id) {
 		return null;
 	}
 
-	@GetMapping("facillity")
+	@GetMapping("facility")
 	@ApiOperation("To fetch All Facilities")
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Fecilitys Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request"),
@@ -49,22 +50,22 @@ public class FacilityController {
 		return null;
 	}
 
-	@PutMapping("admin/{aid}/branch/{bid}/facillity")
+	@PutMapping("admin/{aid}/branch/{bid}/facility")
 	@ApiOperation("To Update Facilities By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update The Facilitys Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Fecility Id/Facility Id did not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Facility>> update(@RequestBody Facility facility, @PathVariable int fid,
-			@PathVariable int aid) {
+	public ResponseEntity<ResponseStructure<Facility>> update(@RequestBody Facility facility,
+			@PathVariable @ApiParam("FacilityID") int fid, @PathVariable int aid) {
 		return null;
 	}
 
-	@DeleteMapping("facillity/{id}")
+	@DeleteMapping("facility/{id}")
 	@ApiOperation("To Delete facility By Id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Delete The Facility Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Facility Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Facility>> delete(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Facility>> delete(@RequestParam @ApiParam("FacilityID") int id) {
 		return null;
 	}
 
