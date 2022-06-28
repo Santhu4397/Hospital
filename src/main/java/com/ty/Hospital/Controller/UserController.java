@@ -19,6 +19,7 @@ import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -44,7 +45,7 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetching User Data Successfully"),
 			@ApiResponse(code = 400, message = "Id did not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<User>> getByID(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<User>> getByID(@RequestParam @ApiParam("AdminID") int id) {
 		return null;
 	}
 
@@ -62,7 +63,7 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/update User Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for UserData/userId not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<User>> update(@RequestBody User user, @PathVariable int aid) {
+	public ResponseEntity<ResponseStructure<User>> update(@RequestBody User user, @PathVariable @ApiParam("AdminID") int aid) {
 		return null;
 	}
 
@@ -71,7 +72,7 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Delete User Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for UserData/userId not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Boolean>> deleteById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Boolean>> deleteById(@RequestParam @ApiParam("AdminID") int id) {
 		return null;
 	}
 

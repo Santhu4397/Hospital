@@ -86,6 +86,19 @@ public class User {
 	public void setRole_discription(String role_discription) {
 		this.role_discription = role_discription;
 	}
+	
+
+	public List<Encounter> getEncounters() {
+		return encounters;
+	}
+
+	public void setEncounters(List<Encounter> encounters) {
+		this.encounters = encounters;
+	}
+
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
 
 	public User(int id, String name, String emailId, String password, Long phone, int age, String gender,
 			String role_discription) {

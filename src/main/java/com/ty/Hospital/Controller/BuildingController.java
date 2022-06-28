@@ -16,6 +16,7 @@ import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -26,8 +27,8 @@ public class BuildingController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/AdiminId/Branch didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Building>> save(@RequestBody Building building, @PathVariable int aid,
-			@PathVariable int bid) {
+	public ResponseEntity<ResponseStructure<Building>> save(@RequestBody Building building,
+			@PathVariable @ApiParam("AdminID") int aid, @PathVariable @ApiParam("BranchID") int bid) {
 		return null;
 	}
 
@@ -36,7 +37,7 @@ public class BuildingController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Building>> getById(@PathVariable int bid) {
+	public ResponseEntity<ResponseStructure<Building>> getById(@PathVariable @ApiParam("BuildingId") int bid) {
 		return null;
 	}
 
@@ -54,8 +55,8 @@ public class BuildingController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Id/Admin Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Building>> update(@RequestBody Building building, @PathVariable int bid,
-			@PathVariable int aid) {
+	public ResponseEntity<ResponseStructure<Building>> update(@RequestBody Building building,
+			@PathVariable @ApiParam("BulidingID") int bid, @PathVariable @ApiParam("AdminID") int aid) {
 		return null;
 	}
 
@@ -64,7 +65,7 @@ public class BuildingController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Delete The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Building>> delete(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Building>> delete(@RequestParam @ApiParam("BuildingID") int id) {
 		return null;
 	}
 

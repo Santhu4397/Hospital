@@ -16,27 +16,58 @@ import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 public class BranchController {
-	
+
 	@PostMapping("admin/{aid}/hospital/{hid}/branch")
-	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch,@PathVariable int aid,@PathVariable int hid) {
+	@ApiOperation("To Save The Branch By AdminID")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save Branch Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Admin/Hospital Did Not Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch,
+			@PathVariable @ApiParam("AdminID") int aid, @PathVariable @ApiParam("HospitalID") int hid) {
 		return null;
 	}
+
 	@GetMapping("branch/{bid}")
-	public ResponseEntity<ResponseStructure<Branch>> getById(@PathVariable int bid){
+	@ApiOperation("To Fetch The Branch By BranchID")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Branch Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Branch>> getById(@PathVariable @ApiParam("BranchID") int bid) {
 		return null;
 	}
+
 	@GetMapping("branch")
-	public ResponseEntity<ResponseStructure<List<Branch>>> getAll(){
+	@ApiOperation("To Fetch The All Branch ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch All Branch Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branches Did Not Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<List<Branch>>> getAll() {
 		return null;
 	}
+
 	@PutMapping("admin/{aid}/branch")
-	public ResponseEntity<ResponseStructure<Branch>> update(@RequestBody Building building,@PathVariable int bid,@PathVariable int aid){
+	@ApiOperation("To Update The Branch By BranchID")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update Branch Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Branch>> update(@RequestBody Building building,
+			@PathVariable @ApiParam("BranchID") int bid, @PathVariable @ApiParam("AdminID") int aid) {
 		return null;
 	}
+
 	@DeleteMapping("branch")
-	public ResponseEntity<ResponseStructure<Branch>> delete(@RequestParam int bid){
+	@ApiOperation("To Delete The Branch By BranchID")
+	@ApiResponses({ @ApiResponse(code = 200, message = " Delete Branch Successfully"),
+			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<Branch>> delete(@RequestParam @ApiParam("BranchID") int bid) {
 		return null;
 	}
 

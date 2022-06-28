@@ -46,4 +46,28 @@ public class Room {
 		return SEQUENCE_NAME;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Floor getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Floor floor) {
+		this.floor = floor;
+	}
+
+	public List<Bed> getBed() {
+		return bed;
+	}
+
+	public void setBed(List<Bed> bed) {
+		this.bed = bed;
+	}
+
 }

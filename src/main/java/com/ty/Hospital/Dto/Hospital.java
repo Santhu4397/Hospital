@@ -82,6 +82,14 @@ public class Hospital {
 		return SEQUENCE_NAME;
 	}
 
+	public List<Branch> getBranchs() {
+		return branchs;
+	}
+
+	public void setBranchs(List<Branch> branchs) {
+		this.branchs = branchs;
+	}
+
 	public Hospital(int id, String name, String website, Long phone, String email, String gst, User user) {
 		super();
 		this.id = id;

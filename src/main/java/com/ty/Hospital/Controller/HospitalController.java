@@ -19,6 +19,7 @@ import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -36,7 +37,7 @@ public class HospitalController {
 			@ApiResponse(code = 400, message = "bad request for Data/AdminId Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital,
-			@PathVariable int aid) {
+			@PathVariable @ApiParam("AdminID") int aid) {
 		hospital.setId(service.generateHospitalSequence(Hospital.SEQUENCE_NAME));
 		return null;
 	}
@@ -46,7 +47,7 @@ public class HospitalController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data/HospitalId Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam @ApiParam("HospitalID") int id) {
 		return null;
 	}
 
@@ -59,13 +60,13 @@ public class HospitalController {
 		return null;
 	}
 
-	@PutMapping("hospital/{hid}/admin/{aid}")
+	@PutMapping("/admin/{aid}/hospital/{hid}")
 	@ApiOperation("To Update Hospital By hospitalid and AdminId")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Update Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data/AdminId (or)hospital Id Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Hospital hospital, @PathVariable int hid,
-			@PathVariable int aid) {
+	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Hospital hospital,
+			@PathVariable @ApiParam("HospitalID") int hid, @PathVariable @ApiParam("AdminID") int aid) {
 		return null;
 	}
 
@@ -74,7 +75,7 @@ public class HospitalController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Update Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data/hospital Id Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Boolean>> delete(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Boolean>> delete(@RequestParam @ApiParam("HospitalID") int id) {
 		return null;
 	}
 
