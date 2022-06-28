@@ -54,4 +54,20 @@ public class Encounter {
 		return SEQUENCE_NAME;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Bed getBed() {
+		return bed;
+	}
+
+	public void setBed(Bed bed) {
+		this.bed = bed;
+	}
+
 }

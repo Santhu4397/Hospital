@@ -29,8 +29,8 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Admin/Hospital Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch, @PathVariable @ApiParam("AdminID") int aid,
-			@PathVariable @ApiParam("HospitalID") int hid) {
+	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch,
+			@PathVariable @ApiParam("AdminID") int aid, @PathVariable @ApiParam("HospitalID") int hid) {
 		return null;
 	}
 
@@ -57,8 +57,8 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> update(@RequestBody Building building, @PathVariable @ApiParam("BranchID") int bid,
-			@PathVariable @ApiParam("AdminID")  int aid) {
+	public ResponseEntity<ResponseStructure<Branch>> update(@RequestBody Building building,
+			@PathVariable @ApiParam("BranchID") int bid, @PathVariable @ApiParam("AdminID") int aid) {
 		return null;
 	}
 
@@ -67,7 +67,7 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = " Delete Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> delete(@RequestParam  @ApiParam("BranchID") int bid) {
+	public ResponseEntity<ResponseStructure<Branch>> delete(@RequestParam @ApiParam("BranchID") int bid) {
 		return null;
 	}
 
