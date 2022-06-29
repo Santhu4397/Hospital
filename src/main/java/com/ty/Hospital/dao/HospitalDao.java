@@ -6,7 +6,7 @@ import com.ty.Hospital.Dto.Hospital;
 
 public interface HospitalDao {
 
-	public Hospital saveHospital(Hospital hospital);
+	public Hospital saveHospital(Hospital hospital, int userID);
 	
 	public Hospital getHospitalById(int hid);
 	
