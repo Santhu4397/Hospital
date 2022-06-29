@@ -10,6 +10,7 @@ import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
+
 @Repository
 public class HospitalDaoImpl implements HospitalDao {
 
@@ -17,16 +18,19 @@ public class HospitalDaoImpl implements HospitalDao {
 	private HospitalRepo hospitalRepo;
 	@Autowired
 	private UserDaoImpl userDaoImpl;
+
 	@Override
-	public Hospital saveHospital(Hospital hospital) {
+	public Hospital saveHospital(Hospital hospital, int userId) {
+		User user = userDaoImpl.getUserById(userId);
+		hospital.setUser(user);
 		return hospitalRepo.save(hospital);
 	}
 
 	@Override
 	public Hospital getHospitalById(int hid) {
-		Optional<Hospital> optional=hospitalRepo.findById(hid);
-		if(optional.isEmpty()) {
-		return 	optional.get();
+		Optional<Hospital> optional = hospitalRepo.findById(hid);
+		if (optional.isEmpty()) {
+			return optional.get();
 		}
 		return null;
 	}
@@ -38,17 +42,17 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public Hospital updateHospitalById(int hid, Hospital hospital) {
-		Hospital exsiting=getHospitalById(hid);
-		if(exsiting!=null) {
+		Hospital exsiting = getHospitalById(hid);
+		if (exsiting != null) {
 			exsiting.setBranchs(hospital.getBranchs());
 			exsiting.setEmail(hospital.getEmail());
 			exsiting.setGst(hospital.getGst());
 			exsiting.setName(hospital.getName());
 			exsiting.setPhone(hospital.getPhone());
 			exsiting.setWebsite(hospital.getWebsite());
-			User user=userDaoImpl.getUserById(hospital.getUser().getId());
-			if(user!=null) {
-			exsiting.setUser(hospital.getUser());
+			User user = userDaoImpl.getUserById(hospital.getUser().getId());
+			if (user != null) {
+				exsiting.setUser(hospital.getUser());
 			}
 			return hospitalRepo.save(exsiting);
 		}
@@ -57,10 +61,10 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public boolean deleteHospital(int hid) {
-		Hospital hospital=getHospitalById(hid);
-		if(hospital!=null) {
-		hospitalRepo.delete(hospital);
-		return true;
+		Hospital hospital = getHospitalById(hid);
+		if (hospital != null) {
+			hospitalRepo.delete(hospital);
+			return true;
 		}
 		return false;
 	}
