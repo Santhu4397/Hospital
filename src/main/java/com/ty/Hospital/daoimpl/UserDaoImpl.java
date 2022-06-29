@@ -1,6 +1,5 @@
 package com.ty.Hospital.daoimpl;
 
-import java.rmi.server.UID;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +38,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User updateUserById(int uid, User user) {
 		User existingUser = getUserById(uid);
-		if(existingUser != null) {
+		if (existingUser != null) {
 			existingUser.setName(user.getName());
 			existingUser.setAge(user.getAge());
 			existingUser.setEmailId(user.getEmailId());
@@ -52,8 +51,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean deleteUser(int uid) {
-		// TODO Auto-generated method stub
-		return false;
+		User user = getUserById(uid);
+		if (user != null) {
+			userRepo.delete(user);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
