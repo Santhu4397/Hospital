@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class BedController {
-	@PostMapping("hospital/{hid}/branch/{bid}/bed")
+	@PostMapping("floor/{fid}/branch/{bid}/bed")
 	@ApiOperation("To Save bed By Admin")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The bed Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/HospitalId"),
