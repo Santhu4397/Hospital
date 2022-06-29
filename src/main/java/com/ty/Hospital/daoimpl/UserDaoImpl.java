@@ -1,6 +1,5 @@
 package com.ty.Hospital.daoimpl;
 
-import java.rmi.server.UID;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +45,7 @@ public class UserDaoImpl implements UserDao {
 			existingUser.setGender(user.getGender());
 			existingUser.setPhone(user.getPhone());
 			existingUser.setPassword(user.getPassword());
+			return userRepo.save(existingUser);
 		}
 		return null;
 	}
