@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ty.Hospital.Dto.LoginCredinstials;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.UserRepo;
 import com.ty.Hospital.Service.SequenceGeneratorService;
@@ -31,6 +32,14 @@ public class UserController {
 	SequenceGeneratorService service;
 
 	@PostMapping("user")
+	@ApiOperation("To login into webservices ")
+	@ApiResponses({ @ApiResponse(code = 200, message = "User Login Successfully"),
+			@ApiResponse(code = 400, message = "bad request for UserData"),
+			@ApiResponse(code = 500, message = "internal server error") })
+	public ResponseEntity<ResponseStructure<User>> userLogin(@RequestBody LoginCredinstials credinstials) {
+		return null;
+	}
+	@PostMapping("user")
 	@ApiOperation("To Save The User Data ")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save User Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for UserData"),
@@ -39,6 +48,7 @@ public class UserController {
 		user.setId(service.generateSequence(User.SEQUENCE_NAME));
 		return null;
 	}
+
 
 	@GetMapping("user/uid/{id}")
 	@ApiOperation("To Fetch The User Data By Id ")
