@@ -1,5 +1,7 @@
 package com.ty.Hospital.dao;
 
+import java.util.List;
+
 import com.ty.Hospital.Dto.Encounter;
 
 public interface EncounterDao {
@@ -8,7 +10,7 @@ public interface EncounterDao {
 
 	public Encounter getEncounterById(int encounterId);
 
-	public Encounter getAllEncounterByBedId(int bedId);
+	public List<Encounter> getAllEncounterByBedId(int bedId);
 
 	public Encounter updateEncounterById(int encounterId, Encounter encounter);
 
