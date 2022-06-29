@@ -45,6 +45,7 @@ public class UserDaoImpl implements UserDao {
 			existingUser.setGender(user.getGender());
 			existingUser.setPhone(user.getPhone());
 			existingUser.setPassword(user.getPassword());
+			return userRepo.save(existingUser);
 		}
 		return null;
 	}
