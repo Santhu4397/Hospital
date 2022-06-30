@@ -44,16 +44,16 @@ public class HospitalDaoImpl implements HospitalDao {
 	public Hospital updateHospitalById(int hid, Hospital hospital) {
 		Hospital exsiting = getHospitalById(hid);
 		if (exsiting != null) {
-			exsiting.setBranchs(hospital.getBranchs());
+			//exsiting.setBranchs(hospital.getBranchs());
 			exsiting.setEmail(hospital.getEmail());
 			exsiting.setGst(hospital.getGst());
 			exsiting.setName(hospital.getName());
 			exsiting.setPhone(hospital.getPhone());
 			exsiting.setWebsite(hospital.getWebsite());
-			User user = userDaoImpl.getUserById(hospital.getUser().getId());
-			if (user != null) {
-				exsiting.setUser(hospital.getUser());
-			}
+			//User user = userDaoImpl.getUserById(hospital.getUser().getId());
+//			if (user != null) {
+//				exsiting.setUser(hospital.getUser());
+//			}
 			return hospitalRepo.save(exsiting);
 		}
 		return null;

@@ -48,7 +48,7 @@ public class HospitalController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data/HospitalId Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam @ApiParam("HospitalID") int id) {
+	public ResponseEntity<ResponseStructure<Hospital>> getById(@PathVariable @ApiParam("HospitalID") int id) {
 		return hospitalService.getById(id);
 	}
 
@@ -71,7 +71,7 @@ public class HospitalController {
 		return hospitalService.updatHospital(hid, hospital);
 	}
 
-	@DeleteMapping("hospital/hid/{id}")
+	@DeleteMapping("hospital")
 	@ApiOperation("To Delete Hospital By hospitalId")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Update Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data/hospital Id Does not found"),

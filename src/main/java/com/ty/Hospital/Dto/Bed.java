@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import io.swagger.annotations.ApiModel;
 
-@Document(collation = "Beds")
+@Document(collection  = "Beds")
 @ApiModel(value = "Bed class", description = "Bed for the encounter ")
 public class Bed {
 	@Transient
