@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "Floors")
+@Document(collection = "Floors")
 public class Floor {
 	@Transient
 	public static final String SEQUENCE_NAME = "floor_Sequences";
@@ -69,6 +69,5 @@ public class Floor {
 	public void setBuilding(Building building) {
 		this.building = building;
 	}
-	
-	
+
 }

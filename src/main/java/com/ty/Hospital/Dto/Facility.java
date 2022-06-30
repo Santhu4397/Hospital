@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "facility")
+@Document(collection = "facility")
 public class Facility {
 	@Transient
 	public static final String SEQUENCE_NAME = "facility_Sequences";
@@ -58,6 +58,5 @@ public class Facility {
 	public void setBuilding(Building building) {
 		this.building = building;
 	}
-	
-	
+
 }
