@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Repo.HospitalRepo;
+import com.ty.Hospital.Service.HospitalService;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 public class HospitalController {
 	@Autowired
-	private HospitalRepo repo;
+	private HospitalService hospitalService;
 
 	@Autowired
 	SequenceGeneratorService service;
@@ -39,7 +40,7 @@ public class HospitalController {
 	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital,
 			@PathVariable @ApiParam("AdminID") int aid) {
 		hospital.setId(service.generateHospitalSequence(Hospital.SEQUENCE_NAME));
-		return null;
+		return hospitalService.saveHospital(hospital, aid);
 	}
 
 	@GetMapping("hospital/hid/{id}")
@@ -48,7 +49,7 @@ public class HospitalController {
 			@ApiResponse(code = 400, message = "bad request for Data/HospitalId Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Hospital>> getById(@RequestParam @ApiParam("HospitalID") int id) {
-		return null;
+		return hospitalService.getById(id);
 	}
 
 	@GetMapping("hospital")
@@ -57,7 +58,7 @@ public class HospitalController {
 			@ApiResponse(code = 400, message = "bad request for Data"),
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<List<Hospital>>> getall() {
-		return null;
+		return hospitalService.getAllHospital();
 	}
 
 	@PutMapping("/admin/{aid}/hospital/{hid}")
@@ -67,7 +68,7 @@ public class HospitalController {
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Hospital hospital,
 			@PathVariable @ApiParam("HospitalID") int hid, @PathVariable @ApiParam("AdminID") int aid) {
-		return null;
+		return hospitalService.updatHospital(hid, hospital);
 	}
 
 	@DeleteMapping("hospital/hid/{id}")
@@ -76,7 +77,7 @@ public class HospitalController {
 			@ApiResponse(code = 400, message = "bad request for Data/hospital Id Does not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Boolean>> delete(@RequestParam @ApiParam("HospitalID") int id) {
-		return null;
+		return hospitalService.deleteHospital(id);
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
@@ -13,7 +14,7 @@ import com.ty.Hospital.Service.HospitalService;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.dao.UserDao;
 import com.ty.Hospital.util.ResponseStructure;
-
+@Service
 public class HospitalServiceImpl implements HospitalService {
 	@Autowired
 	private HospitalDao hospitalDao;
