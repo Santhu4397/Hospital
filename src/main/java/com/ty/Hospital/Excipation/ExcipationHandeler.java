@@ -13,7 +13,7 @@ public class ExcipationHandeler {
 	public ResponseEntity<ResponseStructure<String>> handler(Exception exception){
 		ResponseStructure< String> structure=new ResponseStructure<String>();
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
-		structure.setMessage("Id not Found");
+		structure.setMessage(exception.getMessage());
 		structure.setData(null);
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 	}
