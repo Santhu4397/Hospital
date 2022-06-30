@@ -6,7 +6,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import io.swagger.annotations.ApiModel;
+
 @Document(collation = "Beds")
+@ApiModel(value = "Bed class", description = "Bed for the encounter ")
 public class Bed {
 	@Transient
 	public static final String SEQUENCE_NAME = "bed_Sequences";
