@@ -20,6 +20,12 @@ public class UserDaoImpl implements UserDao {
 	public User saveUSer(User user) {
 		return userRepo.save(user);
 	}
+	@Override
+	public  User findByEmailIdAndPassword(String emailId, String password) {
+	//	return userRepo.findByEmailIdAndPassword(emailId, password);
+		return userRepo.findByEmailId(emailId);
+		
+	}
 
 	@Override
 	public User getUserById(int uid) {
