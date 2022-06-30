@@ -7,8 +7,8 @@ import com.ty.Hospital.Dto.User;
 
 public interface UserRepo extends MongoRepository<User, Integer> {
 	
-//	@Query("{ 'emailId': ?0, 'password': ?1}")
-//	public User findByEmailIdAndPassword(String emailId, String password);
-//	
+	@Query("{ 'emailId': ?0, 'password': ?1}")
+	public User findByEmailIdAndPassword(String emailId, String password);
+	
 	public User findByEmailId(String email);
 }

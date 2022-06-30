@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public  ResponseEntity<ResponseStructure<User>> loginUser(LoginCredinstials credinstials) {
-
+		
 		ResponseStructure<User> structure = new ResponseStructure<User>();
 		ResponseEntity<ResponseStructure<User>> entity = null;
 		User user = userDao.findByEmailIdAndPassword(credinstials.getEmailId(), credinstials.getPassword());
