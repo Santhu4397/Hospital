@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	SequenceGeneratorService service;
 
-	@PostMapping("user")
+	@PostMapping("userlogin")
 	@ApiOperation("To login into webservices ")
 	@ApiResponses({ @ApiResponse(code = 200, message = "User Login Successfully"),
 			@ApiResponse(code = 400, message = "bad request for UserData"),
