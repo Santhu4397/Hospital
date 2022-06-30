@@ -12,7 +12,6 @@ import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Excipation.IdNotFound;
 import com.ty.Hospital.Service.UserService;
 import com.ty.Hospital.dao.UserDao;
-import com.ty.Hospital.daoimpl.UserDaoImpl;
 import com.ty.Hospital.util.ResponseStructure;
 
 @Service
