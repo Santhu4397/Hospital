@@ -59,7 +59,7 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetching User Data Successfully"),
 			@ApiResponse(code = 400, message = "Id did not found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<User>> getByID(@RequestParam @ApiParam("AdminID") int id) {
+	public ResponseEntity<ResponseStructure<User>> getByID(@PathVariable @ApiParam("AdminID") int id) {
 		return userService.getuserById(id);
 	}
 
