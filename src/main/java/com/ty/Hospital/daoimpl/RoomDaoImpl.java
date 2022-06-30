@@ -39,7 +39,7 @@ public class RoomDaoImpl implements RoomDao {
 	@Override
 	public Room getById(int rid) {
 		 Optional<Room> optional=repo.findById(rid);
-		 if(optional.isEmpty()) {
+		 if(optional.isPresent()) {
 			return optional.get();
 		 }
 		 return null;

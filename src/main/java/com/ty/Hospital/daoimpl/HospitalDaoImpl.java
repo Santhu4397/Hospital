@@ -29,7 +29,7 @@ public class HospitalDaoImpl implements HospitalDao {
 	@Override
 	public Hospital getHospitalById(int hid) {
 		Optional<Hospital> optional = hospitalRepo.findById(hid);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			return optional.get();
 		}
 		return null;
