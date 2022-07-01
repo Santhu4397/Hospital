@@ -63,7 +63,7 @@ public class HospitalServiceImpl implements HospitalService {
 			ResponseStructure<Hospital> structure=new ResponseStructure<Hospital>();
 			structure.setStatusCode(HttpStatus.OK.value());
 			structure.setData(hospitalDao.updateHospitalById(hid, hospital));
-			structure.setMessage("hosital");
+			structure.setMessage("hosital updated");
 			return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.OK);
 		}
 		 throw new IdNotFound(hid+"hospital id not found");
