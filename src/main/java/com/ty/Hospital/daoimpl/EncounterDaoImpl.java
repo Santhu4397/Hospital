@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Bed;
 import com.ty.Hospital.Dto.Encounter;
 import com.ty.Hospital.Repo.BedRepository;
 import com.ty.Hospital.Repo.EncounterRepository;
 import com.ty.Hospital.dao.EncounterDao;
-
+@Repository
 public class EncounterDaoImpl implements EncounterDao {
 
 	@Autowired
