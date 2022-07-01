@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Facility;
 import com.ty.Hospital.Repo.FacilityRepo;
 import com.ty.Hospital.dao.BuildingDao;
 import com.ty.Hospital.dao.FacilityDao;
-
+@Repository
 public class FacilityDaoImpl implements FacilityDao {
 
 	@Autowired

@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Room;
 import com.ty.Hospital.Repo.RoomRepo;
 import com.ty.Hospital.dao.RoomDao;
-
+@Repository
 public class RoomDaoImpl implements RoomDao {
 	@Autowired
 	private RoomRepo repo;
