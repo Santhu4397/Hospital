@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Repo.BranchRepository;
 import com.ty.Hospital.dao.BranchDao;
 import com.ty.Hospital.dao.HospitalDao;
-
+@Repository
 public class BranchDaoImpl implements BranchDao {
 
 	@Autowired
