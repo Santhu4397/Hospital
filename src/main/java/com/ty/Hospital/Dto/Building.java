@@ -14,7 +14,7 @@ public class Building {
 	private int id;
 	private String building_Name;
 	private User user;
-	private Branch branch;
+//	private Branch branch;
 	private List<Floor> floors;
 	private List<Facility> facilities;
 
@@ -42,13 +42,13 @@ public class Building {
 		this.user = user;
 	}
 
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
+//	public Branch getBranch() {
+//		return branch;
+//	}
+//
+//	public void setBranch(Branch branch) {
+//		this.branch = branch;
+//	}
 
 	public List<Floor> getFloors() {
 		return floors;

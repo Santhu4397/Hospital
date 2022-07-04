@@ -50,6 +50,7 @@ public class HospitalDaoImpl implements HospitalDao {
 			exsiting.setName(hospital.getName());
 			exsiting.setPhone(hospital.getPhone());
 			exsiting.setWebsite(hospital.getWebsite());
+			exsiting.setBranchs(hospital.getBranchs());
 			//User user = userDaoImpl.getUserById(hospital.getUser().getId());
 //			if (user != null) {
 //				exsiting.setUser(hospital.getUser());

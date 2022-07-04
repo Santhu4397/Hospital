@@ -18,8 +18,8 @@ public class Branch {
 	private String city;
 	private long branch_Number;
 	private int pincode;
-	private User user;
-	private Hospital hospital;
+	//private User user;
+	//private Hospital hospital;
 	private List<Building> buildings;
 
 	public int getId() {
@@ -78,4 +78,33 @@ public class Branch {
 		this.pincode = pincode;
 	}
 
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public Hospital getHospital() {
+//		return hospital;
+//	}
+//
+//	public void setHospital(Hospital hospital) {
+//		this.hospital = hospital;
+//	}
+
+	public List<Building> getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(List<Building> buildings) {
+		this.buildings = buildings;
+	}
+
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
+	
+	
 }

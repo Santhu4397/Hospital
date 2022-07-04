@@ -1,5 +1,6 @@
 package com.ty.Hospital.Service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,15 @@ public class BuildingServiceimpl implements  BuildingService{
 	private BranchDao branchDao;
 	private ResponseStructure<Building> structure=new ResponseStructure<Building>();
 	@Override
-	public ResponseEntity<ResponseStructure<Building>> saveBuilding(Building building, int bid) {
-		Branch branch=branchDao.getBranchById(bid);
-		building.setBranch(branch);
+	public ResponseEntity<ResponseStructure<Building>> saveBuilding(Building building, int branchid) {
+		List<Building> buildings=new ArrayList<Building>();
+		buildings.add(building);
+		Branch branch=branchDao.getBranchById(branchid);
+		branch.setBuildings(buildings);
+		branchDao.updateBranchById(branchid, branch);
 		structure.setStatusCode(HttpStatus.OK.value());
 		structure.setMessage("building saved");
-		structure.setData(buildingDao.saveBuilding(building, bid));
+		structure.setData(buildingDao.saveBuilding(building, branchid));
 		return new ResponseEntity<ResponseStructure<Building>>(structure, HttpStatus.OK);
 	}
 

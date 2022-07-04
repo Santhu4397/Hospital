@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Service.BuildingService;
+import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -26,13 +27,16 @@ import io.swagger.annotations.ApiResponses;
 public class BuildingController {
 	@Autowired
 	BuildingService buildingService;
-	@PostMapping("admin/{aid}/branch/{bid}/building")
+	@Autowired
+	SequenceGeneratorService service;
+	@PostMapping("branch/{bid}/building")
 	@ApiOperation("To Save Building By Admin")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/AdiminId/Branch didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Building>> save(@RequestBody Building building,
 			@PathVariable @ApiParam("AdminID") int aid, @PathVariable @ApiParam("BranchID") int bid) {
+		building.setId(service.generateBuildingSequence(Building.SEQUENCE_NAME));
 		return buildingService.saveBuilding(building, bid);
 	}
 

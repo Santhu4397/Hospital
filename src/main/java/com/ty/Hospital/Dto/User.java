@@ -22,6 +22,16 @@ public class User {
 	private String gender;
 	private String role_discription;
 	private List<Encounter> encounters;
+	private List<Hospital> hospitals;
+	
+
+	public List<Hospital> getHospitals() {
+		return hospitals;
+	}
+
+	public void setHospitals(List<Hospital> hospitals) {
+		this.hospitals = hospitals;
+	}
 
 	public int getId() {
 		return id;
