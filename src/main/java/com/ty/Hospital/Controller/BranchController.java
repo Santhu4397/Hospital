@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Branch;
+import com.ty.Hospital.Dto.Branch_Sequences;
+import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.BranchService;
+import com.ty.Hospital.Service.SequenceGeneratorService;
+import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +31,10 @@ public class BranchController {
 
 	@Autowired
 	public BranchService branchService;
+	
+	@Autowired
+	public SequenceGeneratorService generatorService;
+
 
 	@PostMapping("/hospital/{hid}/branch")
 	@ApiOperation("To Save The Branch By AdminID")
@@ -35,6 +43,7 @@ public class BranchController {
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch,
 			@PathVariable @ApiParam("HospitalID") int hid) {
+		branch.setId(generatorService.generateBranchSequence(Branch.SEQUENCE_NAME));
 		return branchService.saveBranchByHospital(hid, branch);
 	}
 
@@ -71,7 +80,7 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = " Delete Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<String>> delete(@RequestParam @ApiParam("BranchID") int bid) {
+	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable @ApiParam("BranchID") int bid) {
 		return branchService.deleteBranchById(bid);
 	}
 

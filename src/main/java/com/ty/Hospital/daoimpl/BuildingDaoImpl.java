@@ -41,7 +41,7 @@ public class BuildingDaoImpl implements BuildingDao {
 	public Building updateBuilding(Building building, int bid) {
 		Building exsiting=getBuildingById(bid);
 		if(exsiting!=null) {
-			exsiting.setBranch(building.getBranch());
+		//	exsiting.setBranch(building.getBranch());
 			exsiting.setBuilding_Name(building.getBuilding_Name());
 			exsiting.setFacilities(building.getFacilities());
 			exsiting.setFloors(building.getFloors());

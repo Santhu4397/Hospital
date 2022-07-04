@@ -23,7 +23,7 @@ public class BranchDaoImpl implements BranchDao {
 	@Override
 	public Branch saveBranchByHospital(int hospitalID, Branch branch) {
 		Hospital hospital = hospitalDao.getHospitalById(hospitalID);
-		branch.setHospital(hospital);
+		//branch.setHospital(hospital);
 		return branchRepository.save(branch);
 	}
 
