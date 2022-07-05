@@ -24,7 +24,8 @@ public class BranchDaoImpl implements BranchDao {
 	public Branch saveBranchByHospital(int hospitalID, Branch branch) {
 		Hospital hospital = hospitalDao.getHospitalById(hospitalID);
 		//branch.setHospital(hospital);
-		return branchRepository.save(branch);
+		//return branchRepository.save(branch);
+		return null;
 	}
 
 	@Override

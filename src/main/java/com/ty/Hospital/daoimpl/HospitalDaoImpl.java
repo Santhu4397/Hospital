@@ -44,14 +44,14 @@ public class HospitalDaoImpl implements HospitalDao {
 	public Hospital updateHospitalById(int hid, Hospital hospital) {
 		Hospital exsiting = getHospitalById(hid);
 		if (exsiting != null) {
-			//exsiting.setBranchs(hospital.getBranchs());
+			// exsiting.setBranchs(hospital.getBranchs());
 			exsiting.setEmail(hospital.getEmail());
 			exsiting.setGst(hospital.getGst());
 			exsiting.setName(hospital.getName());
 			exsiting.setPhone(hospital.getPhone());
 			exsiting.setWebsite(hospital.getWebsite());
 			exsiting.setBranchs(hospital.getBranchs());
-			//User user = userDaoImpl.getUserById(hospital.getUser().getId());
+			// User user = userDaoImpl.getUserById(hospital.getUser().getId());
 //			if (user != null) {
 //				exsiting.setUser(hospital.getUser());
 //			}
@@ -68,6 +68,16 @@ public class HospitalDaoImpl implements HospitalDao {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Hospital getByBranchId(int id) {
+		return hospitalRepo.getBybranchId(id);
+	}
+
+	@Override
+	public Hospital getByBuildingId(int id) {
+		return hospitalRepo.getByBuildingId(id);
 	}
 
 }

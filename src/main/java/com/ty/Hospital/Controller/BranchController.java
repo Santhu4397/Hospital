@@ -41,7 +41,7 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Admin/Hospital Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> save(@RequestBody Branch branch,
+	public ResponseEntity<ResponseStructure<Hospital>> save(@RequestBody Branch branch,
 			@PathVariable @ApiParam("HospitalID") int hid) {
 		branch.setId(generatorService.generateBranchSequence(Branch.SEQUENCE_NAME));
 		return branchService.saveBranchByHospital(hid, branch);
@@ -52,7 +52,7 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> getById(@PathVariable @ApiParam("BranchID") int bid) {
+	public ResponseEntity<ResponseStructure<Hospital>> getById(@PathVariable @ApiParam("BranchID") int bid) {
 		return branchService.getBranchById(bid);
 	}
 
@@ -70,9 +70,9 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save/Update Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Branch>> update(@RequestBody Branch branch,
+	public ResponseEntity<ResponseStructure<Hospital>> update(@RequestBody Branch branch,@PathVariable int hid,
 			@PathVariable @ApiParam("BranchID") int bid) {
-		return branchService.updateBranchById(bid, branch);
+		return branchService.updateBranchById(hid,bid, branch);
 	}
 
 	@DeleteMapping("hospital/{hid}/branch/{bid}")
@@ -80,8 +80,8 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = " Delete Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable @ApiParam("BranchID") int bid) {
-		return branchService.deleteBranchById(bid);
+	public ResponseEntity<ResponseStructure<String>> delete(@PathVariable @ApiParam("BranchID") int bid,@PathVariable int hid) {
+		return branchService.deleteBranchById(hid,bid);
 	}
 
 }
