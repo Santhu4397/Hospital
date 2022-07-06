@@ -72,11 +72,11 @@ public class BuildingServiceimpl implements  BuildingService{
 	@Override
 	public ResponseEntity<ResponseStructure<Hospital>> getById(int bid) {
 		Hospital hospital=hospitalDao.getByBuildingId(bid);
-		
 		if(hospital!=null) {
 			structure.setData(hospital);
 			structure.setMessage("Building feached");
 			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.OK);
 		}
 		throw new IdNotFound(bid+": building Id not found");
 	}
