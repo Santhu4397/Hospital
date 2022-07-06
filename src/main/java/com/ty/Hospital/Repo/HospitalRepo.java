@@ -11,6 +11,6 @@ public interface HospitalRepo extends MongoRepository<Hospital, Integer> {
 	//@Query(value = "{ 'branchs.id':?0}",fields = "{'branchs.id':1,'branchs.branch_Name':1}")
 	@Query(value = "{ 'branchs.id':?0}")
 	public Hospital getBybranchId(int id);
-	@Query(value = "{'branchs.$.buildings.id':?0}")
+	@Query(value = "{'branchs.buildings.id':?0}")
 	public Hospital getByBuildingId(int id);
 }

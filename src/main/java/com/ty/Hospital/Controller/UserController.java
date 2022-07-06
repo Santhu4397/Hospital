@@ -1,4 +1,4 @@
-package com.ty.Hospital.Controller;
+ package com.ty.Hospital.Controller;
 
 import java.util.List;
 
