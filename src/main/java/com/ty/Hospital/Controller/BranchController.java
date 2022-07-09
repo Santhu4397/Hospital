@@ -10,15 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Branch;
-import com.ty.Hospital.Dto.Branch_Sequences;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.BranchService;
 import com.ty.Hospital.Service.SequenceGeneratorService;
-import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;

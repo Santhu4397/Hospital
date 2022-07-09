@@ -8,6 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Bulding")
 public class Building {
+	@Override
+	public String toString() {
+		return "Building [id=" + id + ", building_Name=" + building_Name + ", user=" + user + ", branch=" + branch
+				+ ", floors=" + floors + ", facilities=" + facilities + "]";
+	}
+
 	@Transient
 	public static final String SEQUENCE_NAME = "building_sequence";
 	@Id
