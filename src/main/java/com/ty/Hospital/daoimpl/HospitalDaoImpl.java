@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ty.Hospital.Dto.Branch;
+import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
@@ -79,5 +81,7 @@ public class HospitalDaoImpl implements HospitalDao {
 	public Hospital getByBuildingId(int id) {
 		return hospitalRepo.getByBuildingId(id);
 	}
-
+//	public Building getBranchByBuildingId(int id) {
+//		return hospitalRepo.getBranchByBuildinId(id);
+//	}
 }

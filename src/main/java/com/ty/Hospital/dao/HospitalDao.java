@@ -2,6 +2,7 @@ package com.ty.Hospital.dao;
 
 import java.util.List;
 
+import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
 
 public interface HospitalDao {
@@ -19,4 +20,6 @@ public interface HospitalDao {
 	public Hospital getByBranchId(int id);
 
 	public Hospital getByBuildingId(int id);
+//	public Building getBranchByBuildingId(int id);
+	
 }

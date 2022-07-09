@@ -3,6 +3,8 @@ package com.ty.Hospital.Repo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import com.ty.Hospital.Dto.Branch;
+import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
 
 public interface HospitalRepo extends MongoRepository<Hospital, Integer> {
@@ -14,7 +16,7 @@ public interface HospitalRepo extends MongoRepository<Hospital, Integer> {
 	public Hospital getBybranchId(int id);
 	@Query(value = "{'branchs.buildings.id':?0}",fields = "{'branchs.id':1}")
 	public Hospital getByBuildingId(int id);
-	
+//	public Building getBranchByBuildinId(int id);
 	
 	
 	
