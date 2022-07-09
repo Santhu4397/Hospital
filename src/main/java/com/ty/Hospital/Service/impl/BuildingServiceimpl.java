@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
@@ -70,8 +72,10 @@ public class BuildingServiceimpl implements  BuildingService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Hospital>> getById(int bid) {
+	public ResponseEntity<ResponseStructure<Hospital>> getById(int bid)  {
+		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 		Hospital hospital=hospitalDao.getByBuildingId(bid);
+		System.out.println(hospital.getBranchs());
 		if(hospital!=null) {
 			structure.setData(hospital);
 			structure.setMessage("Building feached");

@@ -2,6 +2,9 @@ package com.ty.Hospital.dao;
 
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Hospital;
 
 public interface HospitalDao {
@@ -18,5 +21,5 @@ public interface HospitalDao {
 
 	public Hospital getByBranchId(int id);
 
-	public Hospital getByBuildingId(int id);
+	public Hospital getByBuildingId(int id) ;
 }
