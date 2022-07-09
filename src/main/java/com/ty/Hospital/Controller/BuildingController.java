@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.BuildingService;
@@ -45,7 +48,7 @@ public class BuildingController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branch Id didnot Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Hospital>> getById(@PathVariable @ApiParam("BuildingId") int bid) {
+	public ResponseEntity<ResponseStructure<Hospital>> getById(@PathVariable @ApiParam("BuildingId") int bid)  {
 		return buildingService.getById(bid);
 	}
 

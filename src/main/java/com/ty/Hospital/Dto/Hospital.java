@@ -105,4 +105,11 @@ public class Hospital {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Hospital [id=" + id + ", name=" + name + ", website=" + website + ", phone=" + phone + ", email="
+				+ email + ", gst=" + gst + ", user=" + user + ", branchs=" + branchs + "]";
+	}
+
+	
 }
