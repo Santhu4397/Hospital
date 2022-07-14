@@ -8,19 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection  = "Hospitals")
 
-public class Hospital {
+public class Hospital extends org.bson.Document {
 	@Transient
 	public static final String SEQUENCE_NAME = "hospital_sequence";
+
+
 	@Id
 	private int id;
+
 	private String name;
+  
 	private String website;
+  
 	private Long phone;
+
 	private String email;
+ 
 	private String gst;
 
 	private User user;
 	private List<Branch> branchs;
+	
 
 	public int getId() {
 		return id;
@@ -89,7 +97,7 @@ public class Hospital {
 	public void setBranchs(List<Branch> branchs) {
 		this.branchs = branchs;
 	}
-
+	 
 	public Hospital(int id, String name, String website, Long phone, String email, String gst, User user) {
 		super();
 		this.id = id;
