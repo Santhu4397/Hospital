@@ -14,7 +14,9 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.mongodb.client.AggregateIterable;
@@ -24,6 +26,8 @@ import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
+import com.ty.Hospital.util.HospitalHelper;
+
 
 @Repository
 public class HospitalDaoImpl implements HospitalDao {
@@ -105,15 +109,24 @@ public class HospitalDaoImpl implements HospitalDao {
 		for (Document dc : output) {
 			System.out.println(dc.toJson());
 			//gson.fromJson(dc.toJson(), Hospital.class);
-			Branch branch=dc.get("branchs", Branch.class);
-		 	Object hospital=dc.get("branchs");
-		 	System.out.println(hospital);
-		 	System.out.println(branch);
+//			Branch branch=dc.get("branchs", Branch.class);
+//		 	Object hospital=dc.get("branchs");
+//		 	System.out.println(hospital);
+//		 	System.out.println(branch);
 //			System.out.println(hospital);
-			JSONObject root = new JSONObject(dc.toJson());
-			JSONArray	hospitals=root.getJSONArray("branchs");
-						
-		
+//			JSONObject root = new JSONObject(dc.toJson());
+//			JSONArray	hospitals=root.getJSONArray("branchs");
+//						
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.readValue(dc.toJson(), HospitalHelper.class);
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		 System.out.println("branch name"+branch2.getCity());
 //		  System.out.println("object "+dc);
 //		  System.out.println("branch "+dc.get("branchs"));
