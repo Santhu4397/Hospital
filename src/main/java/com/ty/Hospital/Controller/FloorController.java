@@ -2,6 +2,7 @@ package com.ty.Hospital.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Floor;
+import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +23,8 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class FloorController {
+	@Autowired
+	
 
 	@PostMapping("Building/{bid}/floor")
 	@ApiOperation("To Save Floor By Building")
@@ -29,7 +33,7 @@ public class FloorController {
 			@ApiResponse(code = 500, message = "internal server error") })
 	public ResponseEntity<ResponseStructure<Floor>> saveFloor(@RequestBody Floor floor,
 			@PathVariable @ApiParam("BuiledingID") int bid) {
-		return null;
+		return  null;
 	}
 
 	@GetMapping("Building/{bid}/floor/{fid}")
