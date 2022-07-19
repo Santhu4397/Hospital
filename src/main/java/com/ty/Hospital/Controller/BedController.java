@@ -2,6 +2,7 @@ package com.ty.Hospital.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Bed;
+import com.ty.Hospital.Dto.Hospital;
+import com.ty.Hospital.Service.BedService;
+import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -21,14 +25,19 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class BedController {
-	@PostMapping("floor/{fid}/branch/{bid}/bed")
+	@Autowired
+	BedService bedService;
+	@Autowired
+	SequenceGeneratorService generatorService;
+	@PostMapping("room/{roomid}/bed")
 	@ApiOperation("To Save bed By Admin")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Save The bed Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/HospitalId"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<Bed>> save(@RequestBody Bed bed, @PathVariable int hid,
-			@PathVariable int bid) {
-		return null;
+	public ResponseEntity<ResponseStructure<Hospital>> save(@RequestBody Bed bed,
+			@PathVariable int roomid) {
+		bed.setId(generatorService.generateBedSequence(Bed.SEQUENCE_NAME));
+		return bedService.saveBed(bed, roomid) ;
 	}
 
 	@GetMapping("bed/{id}")

@@ -147,18 +147,37 @@ public class HospitalDaoImpl implements HospitalDao {
 	}
 
 	public Hospitalhelp getHospitalByFloorId(int id) {
-		
+
 		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
-		AggregateIterable<Document> output = collection.aggregate(
-				Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+		AggregateIterable<Document> output = collection
+				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 						new Document("$unwind", new Document("path", "$branchs.buildings")),
 						new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
-				new Document("$match", new Document("branchs.buildings.floors._id", id))));
-		Hospitalhelp hospitalhelp=null;
-		Gson gson=new Gson();
-		for(Document document:output) {
-			System.out.println("*****"+document.toJson());
-			hospitalhelp=gson.fromJson(document.toJson(), Hospitalhelp.class);
+						new Document("$match", new Document("branchs.buildings.floors._id", id))));
+		Hospitalhelp hospitalhelp = null;
+		Gson gson = new Gson();
+		for (Document document : output) {
+
+			hospitalhelp = gson.fromJson(document.toJson(), Hospitalhelp.class);
+		}
+
+		return hospitalhelp;
+	}
+
+	public Hospitalhelp getHospitalByRoomId(int id) {
+
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+		AggregateIterable<Document> output = collection
+				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+						new Document("$unwind", new Document("path", "$branchs.buildings")),
+						new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
+						new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
+						new Document("$match", new Document("branchs.buildings.floors.rooms._id", id))));
+		Hospitalhelp hospitalhelp = null;
+		Gson gson = new Gson();
+		for (Document document : output) {
+			System.out.println("*****" + document.toJson());
+			hospitalhelp = gson.fromJson(document.toJson(), Hospitalhelp.class);
 		}
 		System.out.println(hospitalhelp);
 		return hospitalhelp;
