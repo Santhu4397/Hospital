@@ -17,5 +17,6 @@ public interface FacilityService {
 	public ResponseEntity<ResponseStructure<Facility>> updateFacility(Facility facility, int facilityId);
 		
 	public ResponseEntity<ResponseStructure<Boolean>> deleteFacilityById(int facilityId);
+	
 
 }
