@@ -53,6 +53,7 @@ public class HospitalController {
 	}
 
 	@GetMapping("hospital")
+	
 	@ApiOperation("To Fetch Hospital")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch Hospital Data Successfully"),
 			@ApiResponse(code = 400, message = "bad request for Data"),
