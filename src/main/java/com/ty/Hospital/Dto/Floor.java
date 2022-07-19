@@ -1,5 +1,5 @@
 package com.ty.Hospital.Dto;
-
+ 
 import java.util.List;
 
 import org.springframework.data.annotation.Id;

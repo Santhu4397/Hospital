@@ -22,5 +22,7 @@ public interface HospitalDao {
 
 	public Hospital getByBranchId(int id);
 
-	public Hospitalhelp getByBuildingId(int id) ;
+	public Hospitalhelp getByBuildingId(int id);
+
+	public Hospitalhelp getHospitalByFloorId(int id);
 }
