@@ -19,6 +19,7 @@ import com.ty.Hospital.Service.BuildingService;
 import com.ty.Hospital.dao.BranchDao;
 import com.ty.Hospital.dao.BuildingDao;
 import com.ty.Hospital.dao.HospitalDao;
+import com.ty.Hospital.util.Hospitalhelp;
 import com.ty.Hospital.util.ResponseStructure;
 @Service
 public class BuildingServiceimpl implements  BuildingService{
@@ -72,15 +73,15 @@ public class BuildingServiceimpl implements  BuildingService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Hospital>> getById(int bid)  {
-		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
-		Hospital hospital=hospitalDao.getByBuildingId(bid);
+	public ResponseEntity<ResponseStructure<Hospitalhelp>> getById(int bid)  {
+		ResponseStructure<Hospitalhelp> structure = new ResponseStructure<Hospitalhelp>();
+		Hospitalhelp hospital=hospitalDao.getByBuildingId(bid);
 		System.out.println(hospital.getBranchs());
 		if(hospital!=null) {
 			structure.setData(hospital);
 			structure.setMessage("Building feached");
 			structure.setStatusCode(HttpStatus.OK.value());
-			return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.OK);
+			return new ResponseEntity<ResponseStructure<Hospitalhelp>>(structure, HttpStatus.OK);
 		}
 		throw new IdNotFound(bid+": building Id not found");
 	}

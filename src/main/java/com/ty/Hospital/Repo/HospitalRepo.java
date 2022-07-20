@@ -25,5 +25,5 @@ public interface HospitalRepo extends MongoRepository<Hospital, Integer> {
 //	public List<Branch> getByBuildingId(int id);
 	@Query(value = "{'branchs.buildings.id':?0}")
 	public Hospital getByBuildingId(int id);
-
+	
 }

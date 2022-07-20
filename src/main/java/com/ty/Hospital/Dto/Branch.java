@@ -2,6 +2,7 @@ package com.ty.Hospital.Dto;
 
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,16 +11,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Branch {
 	@Transient
 	public static final String SEQUENCE_NAME = "branch_sequence";
+	@BsonProperty("id")
 	@Id
 	private int id;
+	@BsonProperty("branch_Name")
 	private String branch_Name;
+	@BsonProperty("country")
 	private String country;
+	@BsonProperty("state")
 	private String state;
+	@BsonProperty("city")
 	private String city;
+	@BsonProperty("branch_Number")
 	private long branch_Number;
+	@BsonProperty("pincode")
 	private int pincode;
 	//private User user;
 	//private Hospital hospital;
+	@BsonProperty("buildings")
 	private List<Building> buildings;
 
 	public int getId() {
@@ -103,6 +112,13 @@ public class Branch {
 
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
+	}
+
+	@Override
+	public String toString() {
+		return "Branch [id=" + id + ", branch_Name=" + branch_Name + ", country=" + country + ", state=" + state
+				+ ", city=" + city + ", branch_Number=" + branch_Number + ", pincode=" + pincode + ", buildings="
+				+ buildings + "]";
 	}
 	
 	

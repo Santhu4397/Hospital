@@ -2,6 +2,7 @@ package com.ty.Hospital.Dto;
 
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,12 +17,18 @@ public class Building {
 
 	@Transient
 	public static final String SEQUENCE_NAME = "building_sequence";
+	@BsonProperty("id")
 	@Id
 	private int id;
+	@BsonProperty("building_Name")
 	private String building_Name;
+	@BsonProperty("user")
 	private User user;
+	@BsonProperty("branch")
 	private Branch branch;
+	@BsonProperty("floors")
 	private List<Floor> floors;
+	@BsonProperty("facilities")
 	private List<Facility> facilities;
 
 	public int getId() {

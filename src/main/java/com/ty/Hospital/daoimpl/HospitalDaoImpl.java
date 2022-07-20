@@ -1,15 +1,20 @@
 package com.ty.Hospital.daoimpl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import org.bson.Document;
-import org.bson.json.JsonObject;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.ComparisonOperators.Eq;
 import org.springframework.stereotype.Repository;
 
 import com.ty.Hospital.Dto.Branch;
@@ -17,16 +22,29 @@ import com.ty.Hospital.Dto.Building;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.mongodb.client.model.Filters;
+
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.ty.Hospital.Dto.Branch;
+import com.mongodb.client.MongoDatabase;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.HospitalHelper;
+
+
+import com.ty.Hospital.util.Branchshelp;
+import com.ty.Hospital.util.Hospitalhelp;
+
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 
 @Repository
@@ -97,15 +115,33 @@ public class HospitalDaoImpl implements HospitalDao {
 	}
 
 	@Override
-	public Hospital getByBuildingId(int id) {
-
-		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+	public Hospitalhelp getByBuildingId(int id) {
+//mongo client
+//		CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+//				fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+//		MongoClientSettings clientSettings=MongoClientSettings.builder().codecRegistry(codecRegistry).build();
+//		MongoClient client=MongoClients.create(clientSettings);
+//		MongoDatabase database=client.getDatabase("Hospital").withCodecRegistry(codecRegistry);
+//		MongoCollection<Hospital> collection = database.getCollection("Hospitals",Hospital.class);
+//		Hospital hospital=collection.find(Filters.eq("branchs.buildings._id",id)).first();
+//		System.out.println(hospital.getBranchs());	
+//		ArrayList<Hospital> output = collection
+//				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+//						new Document("$unwind", new Document("path", "$branchs.buildings")),
+//						new Document("$match", new Document("branchs.buildings._id", id))), Hospital.class)
+//				.into(new ArrayList<Hospital>());
+//		System.out.println("output: " + output);
+//		Hospital hashMap = (Hospital) output.get(0);
+//		System.out.println(hashMap);
+		//mongo template
+		MongoCollection<Document> collection=mongoTemplate.getCollection("Hospitals");
 		AggregateIterable<Document> output = collection
 				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 						new Document("$unwind", new Document("path", "$branchs.buildings")),
 						new Document("$match", new Document("branchs.buildings._id", id))));
-		Gson gson = new Gson();
-			
+		
+		Gson gson=new Gson();
+		Hospitalhelp hospitalhelp=null; 
 		for (Document dc : output) {
 			System.out.println(dc.toJson());
 			//gson.fromJson(dc.toJson(), Hospital.class);
@@ -117,25 +153,31 @@ public class HospitalDaoImpl implements HospitalDao {
 //			JSONObject root = new JSONObject(dc.toJson());
 //			JSONArray	hospitals=root.getJSONArray("branchs");
 //						
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			mapper.readValue(dc.toJson(), HospitalHelper.class);
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			hospitalhelp=gson.fromJson(dc.toJson(), Hospitalhelp.class);
+			System.out.println(hospitalhelp.getBranchs().getBuildings().get_id());
+	// System.out.println(dc.get("branchs"));
+		// System.out.println(dc);
+//			System.out.println(dc.toJson());
+//			 ObjectMapper mapper = new ObjectMapper();
+//			Object object=gson.fromJson(dc.toJson(), Hospital.class);
+//			//Object object=dc.get("branchs", Hospital.class);
+//			 System.out.println(object);
+////		 	Object hospital=dc.get("branchs");
+////		 	System.out.println(hospital);
+////			System.out.println(hospital);
+//			JSONObject root = new JSONObject(dc.toJson());
+//			JSONArray	hospitals=root.getJSONArray("branchs");
+//						
+
 //		 System.out.println("branch name"+branch2.getCity());
 //		  System.out.println("object "+dc);
 //		  System.out.println("branch "+dc.get("branchs"));
 //		  System.out.println("branch Id "+dc.get("branchs.buildings"));
-			// hospital=(Hospital)dc.get("branchs");
+		// hospital=(Hospital)dc.get("branchs");
 
 		}
 
-		return null;
+		return hospitalhelp;
 	}
 //	public Building getBranchByBuildingId(int id) {
 //		return hospitalRepo.getBranchByBuildinId(id);
