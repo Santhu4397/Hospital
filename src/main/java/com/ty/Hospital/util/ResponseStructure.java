@@ -22,6 +22,11 @@ public class ResponseStructure <T> {
 	public void setData(T data) {
 		this.data = data;
 	}
+	@Override
+	public String toString() {
+		return "ResponseStructure [statusCode=" + statusCode + ", message=" + message + ", data=" + data + "]";
+	}
+	
 	
 
 }

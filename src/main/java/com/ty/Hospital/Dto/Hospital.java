@@ -7,8 +7,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection  = "Hospitals")
-
-public class Hospital extends org.bson.Document {
+public class Hospital  {
 	@Transient
 	public static final String SEQUENCE_NAME = "hospital_sequence";
 

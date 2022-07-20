@@ -26,11 +26,8 @@ import com.ty.Hospital.util.ResponseStructure;
 @Service
 public class BranchServiceImpl implements BranchService {
 
-	
-
 	@Autowired
 	private HospitalDao hospitalDao;
-	
 
 	@Override
 	public ResponseEntity<ResponseStructure<Hospital>> saveBranchByHospital(int hospitalId, Branch branch) {
@@ -59,10 +56,10 @@ public class BranchServiceImpl implements BranchService {
 	public ResponseEntity<ResponseStructure<Hospital>> getBranchById(int branchId) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 		ResponseEntity<ResponseStructure<Hospital>> entity = null;
-		Hospital hospital=hospitalDao.getByBranchId(branchId);
-		if (hospital != null) {
+		Hospital searchedHospital = hospitalDao.getByBranchId(branchId);
+		if (searchedHospital != null) {
 			structure.setStatusCode(HttpStatus.OK.value());
-			structure.setData(hospital);
+			structure.setData(searchedHospital);
 			structure.setMessage("Branch Fetched Successfully");
 			entity = new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.OK);
 		} else {
@@ -72,16 +69,16 @@ public class BranchServiceImpl implements BranchService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Hospital>> updateBranchById(int hid,int branchId, Branch branch) {
+	public ResponseEntity<ResponseStructure<Hospital>> updateBranchById(int hid, int branchId, Branch branch) {
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 		ResponseEntity<ResponseStructure<Hospital>> entity = null;
-		Hospital hospital=hospitalDao.getByBranchId(branchId);
-		List<Branch> existingBranchs=hospital.getBranchs();
+		Hospital hospital = hospitalDao.getByBranchId(branchId);
+		List<Branch> existingBranchs = hospital.getBranchs();
 		if (existingBranchs != null) {
-			ListIterator<Branch> iterator=existingBranchs.listIterator();
+			ListIterator<Branch> iterator = existingBranchs.listIterator();
 			while (iterator.hasNext()) {
-				Branch existingBranch=iterator.next();
-				if(existingBranch.getId()==branchId) {
+				Branch existingBranch = iterator.next();
+				if (existingBranch.getId() == branchId) {
 					existingBranch.setBranch_Name(branch.getBranch_Name());
 					existingBranch.setBranch_Number(branch.getBranch_Number());
 					existingBranch.setCity(branch.getCity());
@@ -92,9 +89,9 @@ public class BranchServiceImpl implements BranchService {
 					structure.setData(hospitalDao.saveHospital(hospital, 0));
 					structure.setMessage("updated Success");
 				}
-				
+
 			}
-			
+
 			entity = new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.OK);
 		} else {
 			throw new IdNotFound(branchId + "BranchId Does Not Exist");
@@ -109,7 +106,7 @@ public class BranchServiceImpl implements BranchService {
 		Hospital hospital = hospitalDao.getHospitalById(hid);
 		if (hospital != null) {
 			List<Branch> branchs = hospital.getBranchs();
-			ListIterator<Branch> iterator =  branchs.listIterator();
+			ListIterator<Branch> iterator = branchs.listIterator();
 			while (iterator.hasNext()) {
 				Branch branch = iterator.next();
 				if (branch.getId() == branchId) {
@@ -119,7 +116,7 @@ public class BranchServiceImpl implements BranchService {
 					structure.setData("Branch Deleted");
 					structure.setMessage("Successfully");
 					System.out.println("if");
-				}else {
+				} else {
 					structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 					structure.setData(branchId + "Branch Id Does Not Found");
 					structure.setMessage("No Branches Deleted");
@@ -128,7 +125,6 @@ public class BranchServiceImpl implements BranchService {
 				hospital.setBranchs(branchs);
 			}
 
-			
 			entity = new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.OK);
 			return entity;
 		} else {

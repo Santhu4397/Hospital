@@ -1,6 +1,7 @@
 package com.ty.Hospital.util;
 
 public class Branchshelp {
+
 int _id;
 String branch_Name;
 String country;
@@ -50,5 +51,9 @@ public Buildindhelp getBuildings() {
 public void setBuildings(Buildindhelp buildings) {
 	this.buildings = buildings;
 }
-
+@Override
+public String toString() {
+	return "Branchshelp [_id=" + _id + ", branch_Name=" + branch_Name + ", country=" + country + ", state=" + state
+			+ ", branch_Number=" + branch_Number + ", pincode=" + pincode + ", buildings=" + buildings + "]";
+}
 }
