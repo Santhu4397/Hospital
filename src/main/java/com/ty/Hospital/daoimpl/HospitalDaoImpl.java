@@ -2,6 +2,7 @@ package com.ty.Hospital.daoimpl;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 import org.bson.Document;
@@ -9,36 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-
-import com.ty.Hospital.Dto.Branch;
-import com.ty.Hospital.Dto.Building;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.mongodb.client.model.Filters;
-
-
 import com.google.gson.Gson;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
+import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
-
-import com.ty.Hospital.util.HospitalHelper;
-
-
-import com.ty.Hospital.util.Branchshelp;
-import com.ty.Hospital.util.Hospitalhelp;
-
-import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
-import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
-
-
-
 import com.ty.Hospital.util.Hospitalhelp;
 
 
@@ -133,15 +113,18 @@ public class HospitalDaoImpl implements HospitalDao {
 //		System.out.println(hashMap);
 		// mongo template
 		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+	
 		AggregateIterable<Document> output = collection
 				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 						new Document("$unwind", new Document("path", "$branchs.buildings")),
+						new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
 						new Document("$match", new Document("branchs.buildings._id", id))));
 
 		Gson gson = new Gson();
 		Hospitalhelp hospitalhelp = null;
 		for (Document dc : output) {
 			System.out.println(dc.toJson());
+			System.out.println("********************");
 			hospitalhelp=gson.fromJson(dc.toJson(), Hospitalhelp.class);
 			System.out.println(hospitalhelp.getBranchs().getBuildings().get_id());
 	// System.out.println(dc.get("branchs"));

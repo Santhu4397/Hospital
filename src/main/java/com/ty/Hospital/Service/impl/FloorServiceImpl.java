@@ -36,17 +36,15 @@ public class FloorServiceImpl implements FloorService {
 		ListIterator<Branch> iterator = branchs.listIterator();
 		while (iterator.hasNext()) {
 			Branch branch = iterator.next();
-
-			if (branch.getId() == hospitalhelp.getBranchs().get_id()) {
-
+			
+			if(branch.getId() ==hospitalhelp.getBranchs().get_id()) {
 				List<Building> buildings = branch.getBuildings();
 				ListIterator<Building> buildingiterator = buildings.listIterator();
 				while (buildingiterator.hasNext()) {
-
 					Building building = buildingiterator.next();
 					floors = building.getFloors();
 					if (floors != null && building.getId() == hospitalhelp.getBranchs().getBuildings().get_id()) {
-
+						
 						floors.add(floor);
 						building.setFloors(floors);
 
