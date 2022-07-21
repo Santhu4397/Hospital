@@ -15,7 +15,9 @@ import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
+import com.ty.Hospital.Dto.Floor;
 import com.ty.Hospital.Dto.Hospital;
+import com.ty.Hospital.Dto.Room;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
@@ -112,27 +114,50 @@ public class HospitalDaoImpl implements HospitalDao {
 //		Hospital hashMap = (Hospital) output.get(0);
 //		System.out.println(hashMap);
 		// mongo template
-		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
-	
-		AggregateIterable<Document> output = collection
-				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
-						new Document("$unwind", new Document("path", "$branchs.buildings")),
-						new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
-						new Document("$match", new Document("branchs.buildings._id", id))));
 
+		List<Floor> floors = null;
+		List<Room> rooms = null;
+		AggregateIterable<Document> output = null;
+		Hospital hospital=hospitalRepo.getByBuildingId(id);
+		System.out.println("hospital: "+hospital);
+
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+
+		if (floors != null ) {
+			System.out.println("###########################1");
+			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+					new Document("$unwind", new Document("path", "$branchs.buildings")),
+					new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
+					new Document("$match", new Document("branchs.buildings._id", id))));
+		
+		}else if(rooms!=null) {
+			System.out.println("###########################2");
+			output = collection
+					.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+							new Document("$unwind", new Document("path", "$branchs.buildings")),
+							new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
+							new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
+							new Document("$match", new Document("branchs.buildings._id", id))));
+		}
+		else {
+			System.out.println("###########################3");
+			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+					new Document("$unwind", new Document("path", "$branchs.buildings")),
+				 
+					new Document("$match", new Document("branchs.buildings._id", id))));
+		}
+
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@3" + output.first());
 		Gson gson = new Gson();
 		Hospitalhelp hospitalhelp = null;
 		for (Document dc : output) {
-			System.out.println(dc.toJson());
-			System.out.println("********************");
-			hospitalhelp=gson.fromJson(dc.toJson(), Hospitalhelp.class);
-			System.out.println(hospitalhelp.getBranchs().getBuildings().get_id());
-	// System.out.println(dc.get("branchs"));
+
+			System.out.println(dc.toJson() + "$$$$$$$$$$$$$$$$$$$$$>");
+			hospitalhelp = gson.fromJson(dc.toJson(), Hospitalhelp.class);
+			System.out.println(hospitalhelp.getBranchs());
+		}
+		// System.out.println(dc.get("branchs"));
 		// System.out.println(dc);
-
-			// System.out.println(dc.get("branchs"));
-			// System.out.println(dc);
-
 //			System.out.println(dc.toJson());
 //			 ObjectMapper mapper = new ObjectMapper();
 //			Object object=gson.fromJson(dc.toJson(), Hospital.class);
@@ -149,9 +174,7 @@ public class HospitalDaoImpl implements HospitalDao {
 //		  System.out.println("object "+dc);
 //		  System.out.println("branch "+dc.get("branchs"));
 //		  System.out.println("branch Id "+dc.get("branchs.buildings"));
-			// hospital=(Hospital)dc.get("branchs");
-
-		}
+		// hospital=(Hospital)dc.get("branchs");
 
 		return hospitalhelp;
 	}

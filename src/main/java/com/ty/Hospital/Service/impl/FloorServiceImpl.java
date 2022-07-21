@@ -27,17 +27,24 @@ public class FloorServiceImpl implements FloorService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<Hospital>> saveFloor(Floor floor, int buildingId) {
+		
 		ResponseStructure<Hospital> structure = new ResponseStructure<Hospital>();
 		ResponseEntity<ResponseStructure<Hospital>> entity = null;
 		List<Floor> floors = null;
+		System.out.println("************************");
 		Hospitalhelp hospitalhelp = hospitalDao.getByBuildingId(buildingId);
+		System.out.println(hospitalhelp);
+		System.out.println("1**********************1**************1");
 		Hospital hospital = hospitalDao.getByBranchId(hospitalhelp.getBranchs().get_id());
+		
 		List<Branch> branchs = hospital.getBranchs();
 		ListIterator<Branch> iterator = branchs.listIterator();
+	
 		while (iterator.hasNext()) {
 			Branch branch = iterator.next();
-			
-			if(branch.getId() ==hospitalhelp.getBranchs().get_id()) {
+
+			if (branch.getId() == hospitalhelp.getBranchs().get_id()) {
+
 				List<Building> buildings = branch.getBuildings();
 				ListIterator<Building> buildingiterator = buildings.listIterator();
 				while (buildingiterator.hasNext()) {
