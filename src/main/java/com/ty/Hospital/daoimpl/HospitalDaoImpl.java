@@ -116,32 +116,30 @@ public class HospitalDaoImpl implements HospitalDao {
 		List<Floor> floors = null;
 		List<Room> rooms = null;
 		AggregateIterable<Document> output = null;
-		Hospital hospital=hospitalRepo.getByBuildingId(id);
-		System.out.println("hospital: "+hospital);
+		Hospital hospital = hospitalRepo.getByBuildingId(id);
+		System.out.println("hospital: " + hospital);
 
 		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
 
-		if (floors != null ) {
+		if (floors != null) {
 			System.out.println("###########################1");
 			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 					new Document("$unwind", new Document("path", "$branchs.buildings")),
 					new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
 					new Document("$match", new Document("branchs.buildings._id", id))));
-		
-		}else if(rooms!=null) {
+
+		} else if (rooms != null) {
 			System.out.println("###########################2");
-			output = collection
-					.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
-							new Document("$unwind", new Document("path", "$branchs.buildings")),
-							new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
-							new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
-							new Document("$match", new Document("branchs.buildings._id", id))));
-		}
-		else {
+			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+					new Document("$unwind", new Document("path", "$branchs.buildings")),
+					new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
+					new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
+					new Document("$match", new Document("branchs.buildings._id", id))));
+		} else {
 			System.out.println("###########################3");
 			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 					new Document("$unwind", new Document("path", "$branchs.buildings")),
-				 
+
 					new Document("$match", new Document("branchs.buildings._id", id))));
 		}
 
@@ -212,5 +210,20 @@ public class HospitalDaoImpl implements HospitalDao {
 		System.out.println(hospitalhelp);
 		return hospitalhelp;
 	}
-
+	public List<Floor> getListFloorByBuildingId(int id){
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+		AggregateIterable<Document> output = collection
+				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+						new Document("$unwind", new Document("path", "$branchs.buildings")),
+						new Document("$match", new Document("branchs.buildings_id", id))));
+	Building building= null;
+		Gson gson = new Gson();
+		for (Document document : output) {
+			System.out.println(document.toJson());
+			building = gson.fromJson(document.toJson(),Building.class );
+			
+		}
+		System.out.println(building);
+		return null;
+	}
 }
