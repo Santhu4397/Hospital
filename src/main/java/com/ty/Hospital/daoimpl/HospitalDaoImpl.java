@@ -23,6 +23,7 @@ import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.Hospitalhelp;
 
+
 @Repository
 public class HospitalDaoImpl implements HospitalDao {
 
@@ -113,6 +114,7 @@ public class HospitalDaoImpl implements HospitalDao {
 //		Hospital hashMap = (Hospital) output.get(0);
 //		System.out.println(hashMap);
 		// mongo template
+
 		List<Floor> floors = null;
 		List<Room> rooms = null;
 		AggregateIterable<Document> output = null;
@@ -147,6 +149,7 @@ public class HospitalDaoImpl implements HospitalDao {
 		Gson gson = new Gson();
 		Hospitalhelp hospitalhelp = null;
 		for (Document dc : output) {
+
 			System.out.println(dc.toJson() + "$$$$$$$$$$$$$$$$$$$$$>");
 			hospitalhelp = gson.fromJson(dc.toJson(), Hospitalhelp.class);
 			System.out.println(hospitalhelp.getBranchs());
@@ -173,6 +176,7 @@ public class HospitalDaoImpl implements HospitalDao {
 
 		return hospitalhelp;
 	}
+
 
 	public Hospitalhelp getHospitalByFloorId(int id) {
 

@@ -42,16 +42,16 @@ public class FloorServiceImpl implements FloorService {
 	
 		while (iterator.hasNext()) {
 			Branch branch = iterator.next();
-		
+
 			if (branch.getId() == hospitalhelp.getBranchs().get_id()) {
+
 				List<Building> buildings = branch.getBuildings();
 				ListIterator<Building> buildingiterator = buildings.listIterator();
 				while (buildingiterator.hasNext()) {
-
 					Building building = buildingiterator.next();
 					floors = building.getFloors();
 					if (floors != null && building.getId() == hospitalhelp.getBranchs().getBuildings().get_id()) {
-
+						
 						floors.add(floor);
 						building.setFloors(floors);
 
@@ -89,7 +89,7 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor() {
+	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(int buildingId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -105,5 +105,6 @@ public class FloorServiceImpl implements FloorService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

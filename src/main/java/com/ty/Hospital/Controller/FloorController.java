@@ -52,13 +52,13 @@ public class FloorController {
 		return floorService.getFloorById(fid);
 	}
 
-	@GetMapping("Building/{bid}/floor")
+	@GetMapping("Building/{buildingId}/floor")
 	@ApiOperation("To All Fetch Floor By Building")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Fetch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Floor Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor() {
-		return null;
+	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(@PathVariable int buildingId ) {
+		return floorService.getAllFloor(buildingId);
 	}
 
 	@PutMapping("Building/{bid}/floor/{fid}")
