@@ -89,7 +89,7 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor() {
+	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(int buildingId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
