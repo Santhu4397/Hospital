@@ -2,7 +2,6 @@ package com.ty.Hospital.daoimpl;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Optional;
 
 import org.bson.Document;
@@ -13,16 +12,14 @@ import org.springframework.stereotype.Repository;
 import com.google.gson.Gson;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
-import com.ty.Hospital.Dto.Branch;
-import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Dto.Floor;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Dto.Room;
 import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.Hospitalhelp;
-
 
 @Repository
 public class HospitalDaoImpl implements HospitalDao {
@@ -96,54 +93,32 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public Hospitalhelp getByBuildingId(int id) {
-//mongo client
-//		CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-//				fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-//		MongoClientSettings clientSettings=MongoClientSettings.builder().codecRegistry(codecRegistry).build();
-//		MongoClient client=MongoClients.create(clientSettings);
-//		MongoDatabase database=client.getDatabase("Hospital").withCodecRegistry(codecRegistry);
-//		MongoCollection<Hospital> collection = database.getCollection("Hospitals",Hospital.class);
-//		Hospital hospital=collection.find(Filters.eq("branchs.buildings._id",id)).first();
-//		System.out.println(hospital.getBranchs());	
-//		ArrayList<Hospital> output = collection
-//				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
-//						new Document("$unwind", new Document("path", "$branchs.buildings")),
-//						new Document("$match", new Document("branchs.buildings._id", id))), Hospital.class)
-//				.into(new ArrayList<Hospital>());
-//		System.out.println("output: " + output);
-//		Hospital hashMap = (Hospital) output.get(0);
-//		System.out.println(hashMap);
-		// mongo template
-
 		List<Floor> floors = null;
 		List<Room> rooms = null;
 		AggregateIterable<Document> output = null;
-		Hospital hospital=hospitalRepo.getByBuildingId(id);
-		System.out.println("hospital: "+hospital);
+		Hospital hospital = hospitalRepo.getByBuildingId(id);
+		System.out.println("hospital: " + hospital);
 
 		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
 
-		if (floors != null ) {
+		if (floors != null) {
 			System.out.println("###########################1");
 			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 					new Document("$unwind", new Document("path", "$branchs.buildings")),
 					new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
 					new Document("$match", new Document("branchs.buildings._id", id))));
-		
-		}else if(rooms!=null) {
+
+		} else if (rooms != null) {
 			System.out.println("###########################2");
-			output = collection
-					.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
-							new Document("$unwind", new Document("path", "$branchs.buildings")),
-							new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
-							new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
-							new Document("$match", new Document("branchs.buildings._id", id))));
-		}
-		else {
+			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+					new Document("$unwind", new Document("path", "$branchs.buildings")),
+					new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
+					new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
+					new Document("$match", new Document("branchs.buildings._id", id))));
+		} else {
 			System.out.println("###########################3");
 			output = collection.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
 					new Document("$unwind", new Document("path", "$branchs.buildings")),
-				 
 					new Document("$match", new Document("branchs.buildings._id", id))));
 		}
 
@@ -156,29 +131,10 @@ public class HospitalDaoImpl implements HospitalDao {
 			hospitalhelp = gson.fromJson(dc.toJson(), Hospitalhelp.class);
 			System.out.println(hospitalhelp.getBranchs());
 		}
-		// System.out.println(dc.get("branchs"));
-		// System.out.println(dc);
-//			System.out.println(dc.toJson());
-//			 ObjectMapper mapper = new ObjectMapper();
-//			Object object=gson.fromJson(dc.toJson(), Hospital.class);
-//			//Object object=dc.get("branchs", Hospital.class);
-//			 System.out.println(object);
-////		 	Object hospital=dc.get("branchs");
-////		 	System.out.println(hospital);
-////			System.out.println(hospital);
-//			JSONObject root = new JSONObject(dc.toJson());
-//			JSONArray	hospitals=root.getJSONArray("branchs");
-//						
-
-//		 System.out.println("branch name"+branch2.getCity());
-//		  System.out.println("object "+dc);
-//		  System.out.println("branch "+dc.get("branchs"));
-//		  System.out.println("branch Id "+dc.get("branchs.buildings"));
-		// hospital=(Hospital)dc.get("branchs");
+		
 
 		return hospitalhelp;
 	}
-
 
 	public Hospitalhelp getHospitalByFloorId(int id) {
 
@@ -217,4 +173,24 @@ public class HospitalDaoImpl implements HospitalDao {
 		return hospitalhelp;
 	}
 
+	public ListBean getListFloorByBuildingId(int id) {
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+		AggregateIterable<Document> output = collection
+				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+						new Document("$unwind", new Document("path", "$branchs.buildings")),
+						new Document("$match", new Document("branchs.buildings._id", id)),
+						new Document("$project", new Document("branchs.buildings.floors", 1)),
+						new Document("$group", new Document("_id", "$branchs.buildings.floors"))));
+
+		ListBean building = null;
+
+		Gson gson = new Gson();
+		for (Document document : output) {
+			System.out.println("json: " + document.toJson());
+			building =gson.fromJson(document.toJson(), ListBean.class);
+
+		}
+		System.out.println(building.get_id());
+		return building;
+	}
 }
