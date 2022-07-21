@@ -16,6 +16,7 @@ import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Excipation.IdNotFound;
 import com.ty.Hospital.Service.FloorService;
 import com.ty.Hospital.dao.HospitalDao;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.Hospitalhelp;
 import com.ty.Hospital.util.ResponseStructure;
 
@@ -89,9 +90,16 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(int buildingId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ResponseStructure<ListBean>> getAllFloor(int buildingId) {
+		ResponseStructure<ListBean> structure = new ResponseStructure<ListBean>();
+		ListBean floors=hospitalDao.getListFloorByBuildingId(buildingId);
+		if(floors!=null) {
+			structure.setData(floors);
+			structure.setMessage("floor feached");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<ListBean>>(structure, HttpStatus.OK);
+		}
+		throw new IdNotFound(buildingId+": building Id not found");
 	}
 
 	@Override

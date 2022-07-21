@@ -1,7 +1,5 @@
 package com.ty.Hospital.Controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.Hospital.Dto.Floor;
-import com.ty.Hospital.Dto.Floor_Sequences;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.FloorService;
 import com.ty.Hospital.Service.SequenceGeneratorService;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.Hospitalhelp;
 import com.ty.Hospital.util.ResponseStructure;
 
@@ -57,7 +55,7 @@ public class FloorController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Fetch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Floor Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(@PathVariable int buildingId ) {
+	public  ResponseEntity<ResponseStructure<ListBean>> getAllFloor(@PathVariable int buildingId ) {
 		return floorService.getAllFloor(buildingId);
 	}
 
