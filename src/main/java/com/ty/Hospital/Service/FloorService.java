@@ -1,5 +1,6 @@
 package com.ty.Hospital.Service;
 
+
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,9 @@ public interface FloorService {
 	
 	public ResponseEntity<ResponseStructure<Hospitalhelp>> getFloorById(int FloorId);
 	
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor();
+	public ResponseEntity<ResponseStructure<List<Floor>>> getAllFloor(int buildingId);
 		
 	public ResponseEntity<ResponseStructure<Hospital>> updateFloor(Floor floor, int FloorId);
 		
 	public ResponseEntity<ResponseStructure<String>> deleteFloorById(int FloorId);
-
-
 }

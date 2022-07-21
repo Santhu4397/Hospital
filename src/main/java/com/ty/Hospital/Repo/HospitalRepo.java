@@ -21,5 +21,6 @@ public interface HospitalRepo extends MongoRepository<Hospital, Integer> {
 	public  Hospital getByBuildingId(int id);
 
 
+
 	
 }

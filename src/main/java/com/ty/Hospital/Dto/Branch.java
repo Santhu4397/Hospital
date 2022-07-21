@@ -102,7 +102,6 @@ public class Branch {
 //	public void setHospital(Hospital hospital) {
 //		this.hospital = hospital;
 //	}
-
 	public List<Building> getBuildings() {
 		return buildings;
 	}
