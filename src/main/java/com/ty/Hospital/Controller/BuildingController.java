@@ -21,6 +21,7 @@ import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.BuildingService;
 import com.ty.Hospital.Service.SequenceGeneratorService;
 import com.ty.Hospital.util.Hospitalhelp;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -53,13 +54,13 @@ public class BuildingController {
 		return buildingService.getById(bid);
 	}
 
-	@GetMapping("building")
+	@GetMapping("branch/{branchId}/building")
 	@ApiOperation("To fetch All Building ")
 	@ApiResponses({ @ApiResponse(code = 200, message = "fetch The Building Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<List<Hospital>>> getAll() {
-		return buildingService.getAllBuilding();
+	public ResponseEntity<ResponseStructure<ListBean>> getAll(@PathVariable int branchId) {
+		return buildingService.getAllBuildingByBranch(branchId);
 	}
 
 	@PutMapping("admin/{aid}/branch/{bid}/building")

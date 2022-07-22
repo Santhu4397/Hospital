@@ -21,6 +21,7 @@ import com.ty.Hospital.Repo.BranchRepository;
 import com.ty.Hospital.Service.BranchService;
 import com.ty.Hospital.dao.BranchDao;
 import com.ty.Hospital.dao.HospitalDao;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.ResponseStructure;
 
 @Service
@@ -138,14 +139,14 @@ public class BranchServiceImpl implements BranchService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Branch>>> getAllBranchByHospitalId(int hospitalId) {
-		ResponseStructure<List<Branch>> structure = new ResponseStructure<List<Branch>>();
-		ResponseEntity<ResponseStructure<List<Branch>>> entity = null;
+	public ResponseEntity<ResponseStructure<ListBean>> getAllBranchByHospitalId(int hospitalId) {
+		ResponseStructure<ListBean> structure = new ResponseStructure<ListBean>();
+		ResponseEntity<ResponseStructure<ListBean>> entity = null;
 		structure.setStatusCode(HttpStatus.OK.value());
-		structure.setData(hospitalDao.getHospitalById(hospitalId).getBranchs());
+		structure.setData(hospitalDao.getListOfBranchesByHospitalId(hospitalId));
 		structure.setMessage("All Branches Fetched successfully");
 		Hospital hospital = hospitalDao.getHospitalById(hospitalId);
-		entity = new ResponseEntity<ResponseStructure<List<Branch>>>(structure, HttpStatus.OK);
+		entity = new ResponseEntity<ResponseStructure<ListBean>>(structure, HttpStatus.OK);
 		return entity;
 	}
 

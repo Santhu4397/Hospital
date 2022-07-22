@@ -16,6 +16,7 @@ import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.Service.BranchService;
 import com.ty.Hospital.Service.SequenceGeneratorService;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -58,7 +59,7 @@ public class BranchController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Fetch All Branch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Branches Did Not Found"),
 			@ApiResponse(code = 500, message = "internal server error") })
-	public ResponseEntity<ResponseStructure<List<Branch>>> getAll(@PathVariable @ApiParam("HospitalID") int hid) {
+	public ResponseEntity<ResponseStructure<ListBean>> getAll(@PathVariable @ApiParam("HospitalID") int hid) {
 		return branchService.getAllBranchByHospitalId(hid);
 	}
 
