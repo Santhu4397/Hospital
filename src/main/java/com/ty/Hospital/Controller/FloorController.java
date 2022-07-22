@@ -30,7 +30,7 @@ public class FloorController {
 	@Autowired
 	SequenceGeneratorService generatorService;
 
-	@PostMapping("Building/{bid}/floor")
+	@PostMapping("building/{bid}/floor")
 	@ApiOperation("To Save Floor By Building")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Saved Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/BuildingID Not Found"),
@@ -41,7 +41,7 @@ public class FloorController {
 		return  floorService.saveFloor(floor, bid);
 	}
 
-	@GetMapping("Building/{bid}/floor/{fid}")
+	@GetMapping("building/{bid}/floor/{fid}")
 	@ApiOperation("To Fetch Floor By FloorID")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Fetch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/BuildingID/FloorID Not Found"),
@@ -50,7 +50,7 @@ public class FloorController {
 		return floorService.getFloorById(fid);
 	}
 
-	@GetMapping("Building/{buildingId}/floor")
+	@GetMapping("building/{buildingId}/floor")
 	@ApiOperation("To All Fetch Floor By Building")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Fetch Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/Floor Not Found"),
@@ -59,7 +59,7 @@ public class FloorController {
 		return floorService.getAllFloor(buildingId);
 	}
 
-	@PutMapping("Building/{bid}/floor/{fid}")
+	@PutMapping("building/{bid}/floor/{fid}")
 	@ApiOperation("To Update Floor By FloorID")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Floor Updated Successfully"),
 			@ApiResponse(code = 400, message = "Bad Request/BuildingID/FloorID Not Found"),
@@ -69,7 +69,7 @@ public class FloorController {
 		return floorService.updateFloor(floor, fid);
 	}
 	
-	@DeleteMapping("Building/{bid}/floor/{fid}")
+	@DeleteMapping("building/{bid}/floor/{fid}")
 	@ApiOperation("To Delete The Floor By ID")
 	@ApiResponses({@ApiResponse(code = 200, message = "FLoor Deleted Successfully"),
 		@ApiResponse(code = 400, message = "Bad Request/BuildingID/FloorID Not Found"),

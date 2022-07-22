@@ -3,13 +3,13 @@ package com.ty.Hospital.util;
 import java.util.List;
 
 public class ListBean {
-	List<Object> _id;
+	List _id;
 
-	public List<Object> get_id() {
+	public List get_id() {
 		return _id;
 	}
 
-	public void set_id(List<Object> _id) {
+	public void set_id(List _id) {
 		this._id = _id;
 	}
 
