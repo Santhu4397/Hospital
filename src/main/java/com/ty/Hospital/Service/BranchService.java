@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Hospital;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.ResponseStructure;
 
 public interface BranchService {
@@ -14,7 +15,7 @@ public interface BranchService {
 
 	public ResponseEntity<ResponseStructure<Hospital>> getBranchById(int branchId);
 
-	public ResponseEntity<ResponseStructure<List<Branch>>> getAllBranchByHospitalId(int hospitalId);
+	public ResponseEntity<ResponseStructure<ListBean>> getAllBranchByHospitalId(int hospitalId);
 
 	public ResponseEntity<ResponseStructure<Hospital>> updateBranchById(int hid,int branchId, Branch branch);
 

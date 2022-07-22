@@ -27,5 +27,9 @@ public interface HospitalDao {
 	public Hospitalhelp getHospitalByRoomId(int id);
 
 	public ListBean getListFloorByBuildingId(int id);
+	
+	public ListBean getListOfBranchesByHospitalId(int hospitalId);
+	
+	public ListBean getListOfBuildingByBranchId(int buildingId);
 
 }

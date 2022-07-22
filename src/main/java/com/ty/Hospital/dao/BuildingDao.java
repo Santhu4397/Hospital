@@ -9,7 +9,7 @@ public interface BuildingDao {
 
 	public Building getBuildingById(int bid);
 
-	public List<Building> getAllBuildings();
+	public List<Building> getAllBuildingsByBranch(int branchId);
 
 	public Building updateBuilding(Building building, int bid);
 

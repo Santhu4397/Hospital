@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ty.Hospital.Dto.Branch;
 import com.ty.Hospital.Dto.Building;
 import com.ty.Hospital.Repo.BuildingRepo;
+import com.ty.Hospital.dao.BranchDao;
 import com.ty.Hospital.dao.BuildingDao;
 
 @Repository
@@ -15,6 +17,8 @@ public class BuildingDaoImpl implements BuildingDao {
 	
 	@Autowired
 	private BuildingRepo repo;
+	@Autowired
+	private BranchDao branchDao;
 
 	@Override
 	public Building saveBuilding(Building building, int bid) {
@@ -33,8 +37,9 @@ public class BuildingDaoImpl implements BuildingDao {
 	}
 
 	@Override
-	public List<Building> getAllBuildings() {
-		return repo.findAll();
+	public List<Building> getAllBuildingsByBranch(int branchId) {
+		Branch branch = branchDao.getBranchById(branchId);
+		return branch.getBuildings();
 	}
 
 	@Override

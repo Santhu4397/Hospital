@@ -20,6 +20,7 @@ import com.ty.Hospital.dao.BranchDao;
 import com.ty.Hospital.dao.BuildingDao;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.Hospitalhelp;
+import com.ty.Hospital.util.ListBean;
 import com.ty.Hospital.util.ResponseStructure;
 @Service
 public class BuildingServiceimpl implements  BuildingService{
@@ -64,12 +65,14 @@ public class BuildingServiceimpl implements  BuildingService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Hospital>>> getAllBuilding() {
-		ResponseStructure<List<Hospital>> structure=new ResponseStructure<List<Hospital>>();
+	public ResponseEntity<ResponseStructure<ListBean>> getAllBuildingByBranch(int branchId) {
+		ResponseStructure<ListBean> structure=new ResponseStructure<ListBean>();
+		ResponseEntity<ResponseStructure<ListBean>> entity = null;
 		structure.setStatusCode(HttpStatus.OK.value());
-		structure.setMessage("list of Building");
-		structure.setData(null);
-		return new ResponseEntity<ResponseStructure<List<Hospital>>>(structure, HttpStatus.OK);
+		structure.setMessage("list of Building fetched");
+		structure.setData(hospitalDao.getListOfBuildingByBranchId(branchId));
+		entity= new  ResponseEntity<ResponseStructure<ListBean>>(structure, HttpStatus.OK);
+		return entity;
 	}
 
 	@Override

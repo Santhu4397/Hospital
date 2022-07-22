@@ -19,6 +19,7 @@ import com.ty.Hospital.Dto.User;
 import com.ty.Hospital.Repo.HospitalRepo;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.ListBean;
+import com.ty.Hospital.util.FloorHelp;
 import com.ty.Hospital.util.Hospitalhelp;
 
 @Repository
@@ -31,6 +32,7 @@ public class HospitalDaoImpl implements HospitalDao {
 	private UserDaoImpl userDaoImpl;
 	@Autowired
 	MongoTemplate mongoTemplate;
+	private final Gson gson = new Gson();
 
 	@Override
 	public Hospital saveHospital(Hospital hospital, int userId) {
@@ -93,7 +95,10 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public Hospitalhelp getByBuildingId(int id) {
-		List<Floor> floors = null;
+		ListBean bean = getListFloorByBuildingId(id);
+
+		List<FloorHelp> floors = (List<FloorHelp>) bean.get_id();
+		System.out.println(floors.get(0) + "///////////////*****************////////////");
 		List<Room> rooms = null;
 		AggregateIterable<Document> output = null;
 		Hospital hospital = hospitalRepo.getByBuildingId(id);
@@ -123,7 +128,7 @@ public class HospitalDaoImpl implements HospitalDao {
 		}
 
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@3" + output.first());
-		Gson gson = new Gson();
+
 		Hospitalhelp hospitalhelp = null;
 		for (Document dc : output) {
 
@@ -131,7 +136,6 @@ public class HospitalDaoImpl implements HospitalDao {
 			hospitalhelp = gson.fromJson(dc.toJson(), Hospitalhelp.class);
 			System.out.println(hospitalhelp.getBranchs());
 		}
-		
 
 		return hospitalhelp;
 	}
@@ -145,7 +149,7 @@ public class HospitalDaoImpl implements HospitalDao {
 						new Document("$unwind", new Document("path", "$branchs.buildings.floors")),
 						new Document("$match", new Document("branchs.buildings.floors._id", id))));
 		Hospitalhelp hospitalhelp = null;
-		Gson gson = new Gson();
+
 		for (Document document : output) {
 
 			hospitalhelp = gson.fromJson(document.toJson(), Hospitalhelp.class);
@@ -164,7 +168,7 @@ public class HospitalDaoImpl implements HospitalDao {
 						new Document("$unwind", new Document("path", "$branchs.buildings.floors.rooms")),
 						new Document("$match", new Document("branchs.buildings.floors.rooms._id", id))));
 		Hospitalhelp hospitalhelp = null;
-		Gson gson = new Gson();
+
 		for (Document document : output) {
 			System.out.println("*****" + document.toJson());
 			hospitalhelp = gson.fromJson(document.toJson(), Hospitalhelp.class);
@@ -184,13 +188,47 @@ public class HospitalDaoImpl implements HospitalDao {
 
 		ListBean building = null;
 
-		Gson gson = new Gson();
 		for (Document document : output) {
 			System.out.println("json: " + document.toJson());
-			building =gson.fromJson(document.toJson(), ListBean.class);
+			building = gson.fromJson(document.toJson(), ListBean.class);
 
 		}
 		System.out.println(building.get_id());
 		return building;
+	}
+
+	public ListBean getListOfBranchesByHospitalId(int hospitalId) {
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+		AggregateIterable<Document> iterable = collection
+				.aggregate(Arrays.asList(new Document("$match", new Document("_id", hospitalId)),
+						new Document("$project", new Document("branchs", 1)),
+						new Document("$group", new Document("_id", "$branchs")),
+						new Document("$project", new Document("_id.buildings", 0))));
+		ListBean bean = null;
+		for (Document document : iterable) {
+			System.out.println("json: " + document.toJson());
+			bean = gson.fromJson(document.toJson(), ListBean.class);
+
+		}
+		return bean;
+
+	}
+
+	public ListBean getListOfBuildingByBranchId(int buildingId) {
+		MongoCollection<Document> collection = mongoTemplate.getCollection("Hospitals");
+		AggregateIterable<Document> iterable = collection
+				.aggregate(Arrays.asList(new Document("$unwind", new Document("path", "$branchs")),
+						new Document("$match", new Document("branchs._id", buildingId)),
+						new Document("$project", new Document("branchs.buildings", 1)),
+						new Document("$group", new Document("_id", "$branchs.buildings")),
+						new Document("$project", new Document("_id.floors", 0))));
+		ListBean bean = null;
+		for (Document document : iterable) {
+			System.out.println("json: " + document.toJson());
+			bean = gson.fromJson(document.toJson(), ListBean.class);
+
+		}
+		return bean;
+
 	}
 }
