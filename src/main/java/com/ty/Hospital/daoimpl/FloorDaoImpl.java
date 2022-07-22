@@ -22,8 +22,8 @@ public class FloorDaoImpl implements FloorDao {
 
 	@Override
 	public Floor saveFloorByBuilding(int buildingId, Floor floor) {
-		Building building = buildingDao.getBuildingById(buildingId);
-		floor.setBuilding(building);
+//		Building building = buildingDao.getBuildingById(buildingId);
+//		floor.setBuilding(building);
 		return floorRepository.save(floor);
 	}
 
@@ -49,7 +49,6 @@ public class FloorDaoImpl implements FloorDao {
 		if (existingFloor != null) {
 			existingFloor.setFloorNumber(floor.getFloorNumber());
 			existingFloor.setType(floor.getType());
-			existingFloor.setUser(floor.getUser());
 			return floorRepository.save(existingFloor);
 		}
 		return null;

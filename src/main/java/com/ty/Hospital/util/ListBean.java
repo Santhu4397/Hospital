@@ -2,21 +2,33 @@ package com.ty.Hospital.util;
 
 import java.util.List;
 
-public class ListBean {
-	List _id;
+import com.ty.Hospital.Dto.Room;
 
-	public List get_id() {
+public class ListBean {
+	List<FloorHelp> _id;
+
+
+	public List<FloorHelp> get_id() {
 		return _id;
 	}
 
-	public void set_id(List _id) {
+	public void set_id(List<FloorHelp> _id) {
 		this._id = _id;
 	}
-
+	
+	
+	
 	@Override
 	public String toString() {
-		return "RoomBean [_id=" + _id + "]";
+		return "ListBean [_id=" + _id + ", rooms=" + "]";
 	}
+
+	
+
+
+
+	
+	
 	
 
 }

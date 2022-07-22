@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ty.Hospital.Dto.Hospital;
 import com.ty.Hospital.util.ListBean;
+import com.ty.Hospital.util.ListOfRoom;
 import com.ty.Hospital.util.Hospitalhelp;
 
 public interface HospitalDao {
@@ -31,5 +32,7 @@ public interface HospitalDao {
 	public ListBean getListOfBranchesByHospitalId(int hospitalId);
 	
 	public ListBean getListOfBuildingByBranchId(int buildingId);
+	
+	public ListOfRoom getListOfRoomsByFloorId(int floorID);
 
 }
