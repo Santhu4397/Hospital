@@ -20,7 +20,7 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public List<Room> getAllRooms() {
+	public List<Room> getAllRoomByFloorId(int floorID) {
 		return repo.findAll();
 	}
 
@@ -28,11 +28,10 @@ public class RoomDaoImpl implements RoomDao {
 	public Room updatRoom(Room room, int rid) {
 		Room exsiting = getById(rid);
 		if (exsiting != null) {
-			exsiting.setBed(room.getBed());
+			
 			exsiting.setFloor(room.getFloor());
 			exsiting.setRoomNumber(room.getRoomNumber());
 			exsiting.setType(room.getType());
-			exsiting.setUser(room.getUser());
 		}
 		return null;
 	}

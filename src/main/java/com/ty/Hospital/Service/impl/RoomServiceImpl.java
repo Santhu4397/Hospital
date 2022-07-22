@@ -18,6 +18,8 @@ import com.ty.Hospital.Excipation.IdNotFound;
 import com.ty.Hospital.Service.RoomService;
 import com.ty.Hospital.dao.HospitalDao;
 import com.ty.Hospital.util.Hospitalhelp;
+import com.ty.Hospital.util.ListBean;
+import com.ty.Hospital.util.ListOfRoom;
 import com.ty.Hospital.util.ResponseStructure;
 @Service
 public class RoomServiceImpl implements RoomService{
@@ -91,9 +93,17 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<Floor>>> getAllRoom() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ResponseStructure<ListOfRoom>> getAllRoomByFloorId(int floorID) {
+		ResponseStructure<ListOfRoom> structure = new ResponseStructure<ListOfRoom>();
+		ListOfRoom rooms=hospitalDao.getListOfRoomsByFloorId(floorID);
+		System.out.println(rooms+"632444444444445");
+		if(rooms!=null) {
+			structure.setData(rooms);
+			structure.setMessage("Rooms feached");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<ListOfRoom>>(structure, HttpStatus.OK);
+		}
+		throw new IdNotFound(floorID+": floor Id not found");
 	}
 
 	@Override

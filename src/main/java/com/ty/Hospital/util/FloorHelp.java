@@ -1,16 +1,18 @@
 package com.ty.Hospital.util;
 
+import java.util.List;
+
 public class FloorHelp {
 	private int _id;
 	private int floorNumber;
 	private String type;
-	private RoomsHelp rooms;
+	private List<RoomsHelp> rooms;
 
-	public RoomsHelp getRooms() {
+	public List<RoomsHelp> getRooms() {
 		return rooms;
 	}
 
-	public void setRooms(RoomsHelp rooms) {
+	public void setRooms(List<RoomsHelp> rooms) {
 		this.rooms = rooms;
 	}
 
@@ -42,7 +44,5 @@ public class FloorHelp {
 	public String toString() {
 		return "FloorHelp [_id=" + _id + ", floorNumber=" + floorNumber + ", type=" + type + ", rooms=" + rooms + "]";
 	}
-
-	
 
 }

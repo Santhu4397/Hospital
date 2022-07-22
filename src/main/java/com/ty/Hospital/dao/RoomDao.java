@@ -8,7 +8,7 @@ public interface RoomDao {
 
 	public Room saveRoom(Room room);
 
-	public List<Room> getAllRooms();
+	public List<Room> getAllRoomByFloorId(int floorId);
 
 	public Room updatRoom(Room room, int rid);
 
