@@ -180,7 +180,11 @@ public class HospitalDaoImpl implements HospitalDao {
 						new Document("$unwind", new Document("path", "$branchs.buildings")),
 						new Document("$match", new Document("branchs.buildings._id", id)),
 						new Document("$project", new Document("branchs.buildings.floors", 1)),
-						new Document("$group", new Document("_id", "$branchs.buildings.floors"))));
+						new Document("$group", new Document("_id", "$branchs.buildings.floors")),
+						new Document("$project", new Document("_id.rooms", 0))));
+//						new Document("$project", new Document("_id.floorNumber", 1)),
+//						new Document("$project", new Document("_id.type", 1))));
+		
 
 		ListBean building = null;
 
