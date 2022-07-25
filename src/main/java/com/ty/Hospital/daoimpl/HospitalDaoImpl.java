@@ -98,7 +98,7 @@ public class HospitalDaoImpl implements HospitalDao {
 		ListBean bean = getListFloorByBuildingId(id);
 
 		List<FloorHelp> floors = (List<FloorHelp>) bean.get_id();
-		System.out.println(floors.get(0) + "///////////////*****************////////////");
+		System.out.println(floors .get(0)+ "///////////////*****************////////////");
 		List<Room> rooms = null;
 		AggregateIterable<Document> output = null;
 		Hospital hospital = hospitalRepo.getByBuildingId(id);
@@ -184,12 +184,7 @@ public class HospitalDaoImpl implements HospitalDao {
 						new Document("$unwind", new Document("path", "$branchs.buildings")),
 						new Document("$match", new Document("branchs.buildings._id", id)),
 						new Document("$project", new Document("branchs.buildings.floors", 1)),
-						new Document("$group", new Document("_id", "$branchs.buildings.floors")),
-						new Document("$project", new Document("_id.rooms", 0))));
-//						new Document("$project", new Document("_id.floorNumber", 1)),
-//						new Document("$project", new Document("_id.type", 1))));
-		
-
+						new Document("$group", new Document("_id", "$branchs.buildings.floors"))));
 		ListBean building = null;
 
 		for (Document document : output) {
