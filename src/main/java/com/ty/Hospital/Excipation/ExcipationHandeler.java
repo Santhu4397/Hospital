@@ -9,13 +9,13 @@ import com.ty.Hospital.util.ResponseStructure;
 
 @ControllerAdvice
 public class ExcipationHandeler {
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ResponseStructure<String>> handler(Exception exception){
-		ResponseStructure< String> structure=new ResponseStructure<String>();
-		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
-		structure.setMessage(exception.getMessage());
-		structure.setData(null);
-		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
-	}
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<ResponseStructure<String>> handler(Exception exception){
+//		ResponseStructure< String> structure=new ResponseStructure<String>();
+//		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+//		structure.setMessage(exception.getMessage());
+//		structure.setData(null);
+//		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+//	}
 
 }
