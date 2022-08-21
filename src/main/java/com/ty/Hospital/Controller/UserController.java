@@ -90,5 +90,6 @@ public class UserController {
 	public ResponseEntity<ResponseStructure<String>> deleteById(@RequestParam @ApiParam("AdminID") int id) {
 		return userService.deleteUserById(id);
 	}
+	
 
 }

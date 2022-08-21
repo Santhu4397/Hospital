@@ -14,7 +14,7 @@ public class Room {
 	private String type;
 
 	private Floor floor;
-	//private List<Bed> bed;
+	private List<Bed> bed;
 
 	public int getId() {
 		return _id;
@@ -52,12 +52,12 @@ public class Room {
 		this.floor = floor;
 	}
 
-//	public List<Bed> getBed() {
-//		return bed;
-//	}
-//
-//	public void setBed(List<Bed> bed) {
-//		this.bed = bed;
-//	}
+	public List<Bed> getBed() {
+		return bed;
+	}
+
+	public void setBed(List<Bed> bed) {
+		this.bed = bed;
+	}
 
 }
